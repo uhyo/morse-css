@@ -3,37 +3,29 @@
  */
 
 /**
- * Represents a CSS rule with a selector and properties
+ * Represents a detected Morse pattern in the CSS
  */
-export interface CSSRule {
-  /** The CSS selector */
+export interface MorsePattern {
+  /** The full match including the :morse() selector */
+  fullMatch: string;
+  /** The selector part before :morse() */
   selector: string;
-  /** The CSS properties as key-value pairs */
-  properties: Record<string, string>;
-}
-
-/**
- * Represents a parsed pseudo-CSS rule with a :morse() selector
- */
-export interface ParsedMorseRule {
-  /** The original selector containing :morse() */
-  originalSelector: string;
   /** The Morse code word extracted from the :morse() selector */
   morseWord: string;
-  /** The CSS properties as key-value pairs */
-  properties: Record<string, string>;
+  /** The CSS block content (everything between the curly braces) */
+  cssBlock: string;
 }
 
 /**
- * Represents a rule with translated Morse code patterns
+ * Represents a translated Morse pattern
  */
-export interface TranslatedMorseRule {
-  /** The original selector containing :morse() */
-  originalSelector: string;
+export interface TranslatedMorsePattern {
+  /** The original full match */
+  fullMatch: string;
   /** The translated selector with HTML pattern selectors */
   translatedSelector: string;
-  /** The CSS properties as key-value pairs */
-  properties: Record<string, string>;
+  /** The original CSS block content */
+  cssBlock: string;
 }
 
 /**
@@ -42,11 +34,11 @@ export interface TranslatedMorseRule {
 export type MorseChar = "." | "-";
 
 /**
- * Represents a Morse code pattern as an array of dots and dashes
+ * Represents a Morse code sequence as an array of dots and dashes
  */
-export type MorsePattern = MorseChar[];
+export type MorseSequence = MorseChar[];
 
 /**
- * Maps characters to their Morse code patterns
+ * Maps characters to their Morse code sequences
  */
-export type MorseCodeMap = Record<string, MorsePattern>;
+export type MorseCodeMap = Record<string, MorseSequence>;

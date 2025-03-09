@@ -17,14 +17,14 @@ import { generateCSS } from "./generator";
  * @returns The generated CSS with standard selectors
  */
 export function convertMorseCSS(pseudoCSS: string): string {
-  // Parse the pseudo-CSS to extract :morse() selectors and their properties
-  const parsedRules = parsePseudoCSS(pseudoCSS);
+  // Parse the pseudo-CSS to extract :morse() patterns
+  const morsePatterns = parsePseudoCSS(pseudoCSS);
 
   // Translate Morse code patterns to HTML pattern selectors
-  const translatedRules = translateMorsePatterns(parsedRules);
+  const translatedPatterns = translateMorsePatterns(morsePatterns);
 
   // Generate the final CSS with standard selectors
-  return generateCSS(translatedRules);
+  return generateCSS(translatedPatterns);
 }
 
 // Export the individual components for more granular usage

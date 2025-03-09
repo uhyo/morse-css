@@ -1,96 +1,85 @@
 import { describe, it, expect } from "vitest";
 import { translateMorsePatterns } from "../src/translator";
-import { ParsedMorseRule } from "../src/types";
+import { MorsePattern } from "../src/types";
 
 describe("translateMorsePatterns", () => {
-  it("should translate a simple Morse rule", () => {
-    const parsedRules: ParsedMorseRule[] = [
+  it("should translate a simple Morse pattern", () => {
+    const morsePatterns: MorsePattern[] = [
       {
-        originalSelector: "*",
+        fullMatch: "*:morse(BOLD) { font-weight: bold; }",
+        selector: "*",
         morseWord: "BOLD",
-        properties: {
-          "font-weight": "bold",
-        },
+        cssBlock: "font-weight: bold;",
       },
     ];
 
-    const result = translateMorsePatterns(parsedRules);
+    const result = translateMorsePatterns(morsePatterns);
 
     expect(result).toHaveLength(1);
-    expect(result[0].originalSelector).toBe("*");
-    expect(result[0].properties).toEqual({
-      "font-weight": "bold",
-    });
+    expect(result[0].fullMatch).toBe("*:morse(BOLD) { font-weight: bold; }");
+    expect(result[0].cssBlock).toBe("font-weight: bold;");
     // The translated selector should contain :has() and span selectors
     expect(result[0].translatedSelector).toContain(":has(");
     expect(result[0].translatedSelector).toContain("span");
   });
 
-  it("should translate multiple Morse rules", () => {
-    const parsedRules: ParsedMorseRule[] = [
+  it("should translate multiple Morse patterns", () => {
+    const morsePatterns: MorsePattern[] = [
       {
-        originalSelector: "*",
+        fullMatch: "*:morse(BOLD) { font-weight: bold; }",
+        selector: "*",
         morseWord: "BOLD",
-        properties: {
-          "font-weight": "bold",
-        },
+        cssBlock: "font-weight: bold;",
       },
       {
-        originalSelector: "*",
+        fullMatch: "*:morse(RED) { color: red; }",
+        selector: "*",
         morseWord: "RED",
-        properties: {
-          color: "red",
-        },
+        cssBlock: "color: red;",
       },
     ];
 
-    const result = translateMorsePatterns(parsedRules);
+    const result = translateMorsePatterns(morsePatterns);
 
     expect(result).toHaveLength(2);
-    // Check the first rule
-    expect(result[0].originalSelector).toBe("*");
-    expect(result[0].properties).toEqual({
-      "font-weight": "bold",
-    });
+    // Check the first pattern
+    expect(result[0].fullMatch).toBe("*:morse(BOLD) { font-weight: bold; }");
+    expect(result[0].cssBlock).toBe("font-weight: bold;");
     expect(result[0].translatedSelector).toContain(":has(");
 
-    // Check the second rule
-    expect(result[1].originalSelector).toBe("*");
-    expect(result[1].properties).toEqual({
-      color: "red",
-    });
+    // Check the second pattern
+    expect(result[1].fullMatch).toBe("*:morse(RED) { color: red; }");
+    expect(result[1].cssBlock).toBe("color: red;");
     expect(result[1].translatedSelector).toContain(":has(");
   });
 
-  it("should translate Morse rules with complex selectors", () => {
-    const parsedRules: ParsedMorseRule[] = [
+  it("should translate Morse patterns with complex selectors", () => {
+    const morsePatterns: MorsePattern[] = [
       {
-        originalSelector: "div > p",
+        fullMatch: "div > p:morse(BOLD) { font-weight: bold; }",
+        selector: "div > p",
         morseWord: "BOLD",
-        properties: {
-          "font-weight": "bold",
-        },
+        cssBlock: "font-weight: bold;",
       },
     ];
 
-    const result = translateMorsePatterns(parsedRules);
+    const result = translateMorsePatterns(morsePatterns);
 
     expect(result).toHaveLength(1);
-    expect(result[0].originalSelector).toBe("div > p");
     expect(result[0].translatedSelector).toContain("div > p:has(");
   });
 
-  it("should throw an error for unknown characters in Morse words", () => {
-    const parsedRules: ParsedMorseRule[] = [
+  it("should handle unknown characters in Morse words", () => {
+    const morsePatterns: MorsePattern[] = [
       {
-        originalSelector: "*",
-        morseWord: "BOLD123", // Contains numbers which are not handled in this test
-        properties: {
-          "font-weight": "bold",
-        },
+        fullMatch: "*:morse(BOLD123) { font-weight: bold; }",
+        selector: "*",
+        morseWord: "BOLD123", // Contains numbers which should be handled by the translator
+        cssBlock: "font-weight: bold;",
       },
     ];
 
-    expect(() => translateMorsePatterns(parsedRules)).not.toThrow();
+    // This should not throw an error since the translator handles numbers
+    expect(() => translateMorsePatterns(morsePatterns)).not.toThrow();
   });
 });

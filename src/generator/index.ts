@@ -2,15 +2,15 @@
  * Generator for CSS with Morse code pattern selectors
  */
 
-import { TranslatedMorseRule } from "../types";
+import { TranslatedMorsePattern } from "../types";
 
 /**
- * Generates CSS from translated Morse rules
+ * Generates CSS from translated Morse patterns
  *
- * @param translatedRules - The translated Morse rules
+ * @param translatedPatterns - The translated Morse patterns
  * @returns The generated CSS
  */
-export function generateCSS(translatedRules: TranslatedMorseRule[]): string {
+export function generateCSS(translatedPatterns: TranslatedMorsePattern[]): string {
   let css = "";
 
   // Add a header comment
@@ -18,18 +18,10 @@ export function generateCSS(translatedRules: TranslatedMorseRule[]): string {
   css += "/* https://github.com/morse-css */\n";
   css += "\n";
 
-  // Generate CSS for each rule
-  for (const rule of translatedRules) {
-    // Add the selector
-    css += `${rule.translatedSelector} {\n`;
-
-    // Add the properties
-    for (const [property, value] of Object.entries(rule.properties)) {
-      css += `  ${property}: ${value};\n`;
-    }
-
-    // Close the rule
-    css += "}\n\n";
+  // Generate CSS for each pattern
+  for (const pattern of translatedPatterns) {
+    // Add the selector and CSS block
+    css += `${pattern.translatedSelector} {\n${pattern.cssBlock}\n}\n\n`;
   }
 
   return css;
