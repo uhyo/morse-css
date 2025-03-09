@@ -1,0 +1,40 @@
+{
+  "name": "morse-css",
+  "version": "1.0.0",
+  "description": "A powerful classless CSS framework with Morse code patterns",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "morse-css": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc && chmod +x dist/cli.js",
+    "dev": "ts-node src/index.ts",
+    "start": "ts-node src/cli.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint src/**/*.ts",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "convert": "ts-node src/cli.ts"
+  },
+  "keywords": [
+    "css",
+    "framework",
+    "classless",
+    "morse-code"
+  ],
+  "author": "",
+  "license": "MIT",
+  "packageManager": "pnpm@8.15.8+sha512.d1a029e1a447ad90bc96cd58b0fad486d2993d531856396f7babf2d83eb1823bb83c5a3d0fc18f675b2d10321d49eb161fece36fe8134aa5823ecd215feed392",
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "@typescript-eslint/eslint-plugin": "^8.26.0",
+    "@typescript-eslint/parser": "^8.26.0",
+    "eslint": "^9.22.0",
+    "eslint-config-prettier": "^10.1.1",
+    "prettier": "^3.5.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2",
+    "vitest": "^3.0.8"
+  }
+}
