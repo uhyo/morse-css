@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { convertMorseCSS, MORSE_CODE } from "../src/index";
+import { convertMorseCSS, MORSE_CODE } from "./index";
 
 describe("convertMorseCSS", () => {
   it("should convert pseudo-CSS to standard CSS", () => {

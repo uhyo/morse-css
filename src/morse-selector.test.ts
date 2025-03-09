@@ -1,9 +1,5 @@
 import { describe, it, expect } from "vitest";
-import {
-  getMorseSelectorForChar,
-  getMorseSelectorForWord,
-  MORSE_CODE,
-} from "../src/morse-selector";
+import { getMorseSelectorForChar, getMorseSelectorForWord, MORSE_CODE } from "./morse-selector";
 
 describe("getMorseSelectorForChar", () => {
   it("should convert a dot to span:empty", () => {
