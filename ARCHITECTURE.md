@@ -1,6 +1,6 @@
 # Morse CSS Architecture
 
-This document outlines the planned architecture and implementation details for the Morse CSS framework.
+This document outlines the architecture and implementation details for the Morse CSS framework.
 
 ## Overview
 
@@ -8,9 +8,13 @@ Morse CSS is a classless CSS framework that uses Morse code patterns to apply sp
 
 ## Core Components
 
-### 1. Pseudo-CSS Parser
+### 1. Morse Code Converter
 
-The parser will read a human-readable pseudo-CSS file that uses a custom `:morse()` selector. This selector allows developers to specify styles based on Morse code patterns.
+The main component of Morse CSS is a converter that transforms pseudo-CSS with `:morse()` selectors into standard CSS with `:has()` selectors. This is done through a simple string replacement process that:
+
+1. Identifies `:morse()` selectors in the pseudo-CSS
+2. Translates the Morse code words inside the selectors into HTML pattern selectors
+3. Replaces the `:morse()` selectors with `:has()` selectors containing the translated patterns
 
 Example pseudo-CSS:
 
@@ -24,19 +28,19 @@ Example pseudo-CSS:
 }
 ```
 
-### 2. Morse Code Translator
+### 2. Morse Code Representation
 
-This component will translate Morse code words into their corresponding HTML pattern selectors:
+In Morse CSS, Morse code is represented in HTML using the following conventions:
 
-- **Dots** (`.`) in Morse code are represented as `<span></span>`
-- **Dashes** (`-`) are represented as `<span><span><span></span></span></span>`
-- **Spaces** between characters are represented by the absence of elements
+- **Dots** (`.`) in Morse code are represented as `<span></span>` (empty spans)
+- **Dashes** (`-`) are represented as `<span><span><span></span></span></span>` (nested spans)
+- **Spaces** between characters are represented by the adjacent sibling combinator (`+`)
 
-The translator will maintain a dictionary of Morse code patterns and generate the appropriate CSS selectors.
+The converter maintains a dictionary of Morse code patterns for letters and numbers, which it uses to generate the appropriate CSS selectors.
 
-### 3. CSS Generator
+### 3. CSS Generation
 
-The CSS generator will transform the pseudo-CSS with `:morse()` selectors into standard CSS using the `:has()` selector and complex combinations of child and descendant selectors to match the Morse code patterns at the beginning of elements.
+The converter transforms the pseudo-CSS with `:morse()` selectors into standard CSS using the `:has()` selector and combinations of child and adjacent sibling selectors to match the Morse code patterns.
 
 Example transformation:
 
@@ -48,7 +52,7 @@ Example transformation:
 
 /* Output: Generated CSS */
 *:has(
-  span:empty:first-child + 
+  span:empty + 
   span:has(span:has(span:empty)) + 
   span:has(span:has(span:empty)) + 
   span:empty + 
@@ -58,37 +62,32 @@ Example transformation:
 }
 ```
 
-Note that the generated selectors specifically target elements where the Morse code pattern appears at the beginning of the element (using `:first-child`), ensuring the style applies to the entire element. The `+` (adjacent sibling combinator) ensures the spans appear in the correct sequence.
+The `+` (adjacent sibling combinator) ensures the spans appear in the correct sequence, matching the Morse code pattern.
 
 ## Build Process
 
 1. **Input**: Developer creates a pseudo-CSS file with `:morse()` selectors
-2. **Processing**:
-   - Parse the pseudo-CSS file
-   - For each `:morse()` selector, translate the Morse code word into the corresponding HTML pattern selector
-   - Generate the final CSS with standard selectors
+2. **Processing**: The converter transforms the pseudo-CSS into standard CSS
 3. **Output**: A production-ready CSS file that can be included in HTML documents
 
-## Development Workflow
+## Command-Line Interface
 
-1. **Setup**: Initialize the project with necessary dependencies
-2. **Development**:
-   - Create the parser for pseudo-CSS
-   - Implement the Morse code translator
-   - Build the CSS generator
-   - Add test cases for various Morse patterns
-3. **Build**: Create a build script that processes the pseudo-CSS file and outputs the final CSS
-4. **Documentation**: Provide examples and usage guidelines for developers
+Morse CSS includes a command-line interface (CLI) that allows developers to convert pseudo-CSS files to standard CSS:
+
+```
+npx morse-css <input-file> [output-file]
+```
+
+If no output file is specified, the output is written to stdout.
 
 ## File Structure
 
 ```
 morse-css/
 ├── src/
-│   ├── parser/           # Pseudo-CSS parser implementation
-│   ├── translator/       # Morse code translator
-│   ├── generator/        # CSS generator
-│   └── index.js          # Main entry point
+│   ├── index.ts          # Main implementation
+│   ├── types.ts          # Type definitions
+│   └── cli.ts            # Command-line interface
 ├── examples/             # Example usage
 ├── dist/                 # Generated CSS files
 ├── tests/                # Test cases
@@ -99,7 +98,7 @@ morse-css/
 
 ### CSS Selector Complexity
 
-The generated CSS will use complex selectors to match Morse code patterns. Care must be taken to ensure these selectors are efficient and don't cause performance issues in browsers.
+The generated CSS uses complex selectors to match Morse code patterns. Care must be taken to ensure these selectors are efficient and don't cause performance issues in browsers.
 
 ### Browser Compatibility
 
@@ -107,7 +106,7 @@ The implementation relies heavily on the CSS `:has()` selector, which is a relat
 
 ### Extensibility
 
-The architecture should allow for easy addition of new Morse code patterns and corresponding styles. The system should be designed to be extensible without requiring major changes to the core components.
+The architecture allows for easy addition of new Morse code patterns by updating the Morse code dictionary. The system is designed to be extensible without requiring major changes to the core components.
 
 ## Future Enhancements
 
@@ -116,10 +115,3 @@ The architecture should allow for easy addition of new Morse code patterns and c
 3. **Integration with Build Tools**: Create plugins for popular build tools (webpack, Vite, etc.)
 4. **Theme Support**: Add support for theming and customization
 5. **Performance Optimization**: Optimize the generated CSS for better performance
-
-## Implementation Phases
-
-1. **Phase 1**: Core functionality - Parse pseudo-CSS and generate basic CSS with Morse code pattern recognition
-2. **Phase 2**: Optimization - Improve selector efficiency and reduce CSS file size
-3. **Phase 3**: Extensions - Add support for custom patterns and themes
-4. **Phase 4**: Tooling - Develop build tool integrations and developer utilities

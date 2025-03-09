@@ -3,7 +3,7 @@
 /**
  * Command-line interface for Morse CSS
  *
- * This script converts pseudo-CSS files with :morse() selectors to standard CSS.
+ * This script converts pseudo-CSS files with :morse() selectors to standard CSS with :has() selectors.
  *
  * Usage:
  *   npx morse-css <input-file> [output-file]
@@ -31,7 +31,7 @@ try {
   const inputPath = path.resolve(process.cwd(), inputFile);
   const pseudoCSS = fs.readFileSync(inputPath, "utf-8");
 
-  // Convert the pseudo-CSS to standard CSS
+  // Convert the pseudo-CSS to standard CSS with :has() selectors
   const css = convertMorseCSS(pseudoCSS);
 
   // Write the output
