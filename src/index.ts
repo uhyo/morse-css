@@ -2,10 +2,11 @@
  * Morse CSS - A powerful classless CSS framework with Morse code patterns
  *
  * This is the main entry point for the Morse CSS framework.
- * It exports the function to convert pseudo-CSS with :morse() selectors
+ * It provides functionality to convert pseudo-CSS with :morse() selectors
  * to standard CSS with :has() selectors that match Morse code patterns.
  */
 
+// Import dependencies (used internally, not exported)
 import { getMorseSelectorForWord, MORSE_CODE } from "./morse-selector";
 
 /**
@@ -52,12 +53,3 @@ export function convertMorseCSS(pseudoCSS: string): string {
 
   return css;
 }
-
-// Export the Morse code mapping and selector functions
-export { MORSE_CODE, getMorseSelectorForWord } from "./morse-selector";
-
-// Export HTML converter
-export { convertMorseHtml } from "./html-converter";
-
-// Export types
-export * from "./types";
