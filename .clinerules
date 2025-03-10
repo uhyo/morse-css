@@ -1,3 +1,11 @@
 # Welcome to Morse CSS
 
 You are expected to work on Morse CSS, a powerful classless CSS framework. Consult README.md for user guide, and CONTRIBUTING.md for development guide. As a developer you are expected to mainly follow ARCHITECTURE.md contents.
+
+## Development Style
+
+Since Morse CSS is a work in progress, you don't worry about backwards compatibility. If needed, you can change the API and the behavior of Morse CSS, but make sure to update the documentation.
+
+## Preferred Tools
+
+Use pnpm as package manager and task runner.
