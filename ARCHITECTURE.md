@@ -70,28 +70,32 @@ The `+` (adjacent sibling combinator) ensures the spans appear in the correct se
 2. **Processing**: The converter transforms the pseudo-CSS into standard CSS
 3. **Output**: A production-ready CSS file that can be included in HTML documents
 
-## Command-Line Interface
+The build process is automated with the `generate` script, which:
 
-Morse CSS includes a command-line interface (CLI) that allows developers to convert pseudo-CSS files to standard CSS:
+- Converts the pseudo-CSS file to the main CSS output (`morse.css`)
+- Converts the pseudo-syntax HTML example to its final form with Morse code patterns
 
-```
-npx morse-css <input-file> [output-file]
-```
+## Usage
 
-If no output file is specified, the output is written to stdout.
+Morse CSS provides a CSS file (`morse.css`) that can be included in HTML documents to apply styles based on Morse code patterns. The framework is designed to be used directly without requiring any build steps by the end user.
 
 ## File Structure
 
 ```
 morse-css/
-├── src/
+├── src/                  # Source code
 │   ├── index.ts          # Main implementation
-│   ├── types.ts          # Type definitions
-│   └── cli.ts            # Command-line interface
+│   ├── morse-selector.ts # Morse code to CSS selector conversion
+│   ├── html-converter.ts # HTML pseudo-syntax conversion
+│   └── types.ts          # Type definitions
 ├── examples/             # Example usage
-├── dist/                 # Generated CSS files
-├── tests/                # Test cases
+│   ├── index.html        # Example with raw Morse HTML
+│   ├── pseudo-syntax.html # Example with pseudo-syntax
+│   └── converted.html    # Generated from pseudo-syntax
+├── dist/                 # Generated files
+│   └── morse.css         # Main CSS output
 └── pseudo-css/           # Source pseudo-CSS files
+    └── example.pcss      # Source for morse.css
 ```
 
 ## Technical Considerations

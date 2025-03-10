@@ -5,12 +5,13 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && npm run generate",
     "dev": "ts-node src/index.ts",
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "eslint src/**/*.ts",
-    "format": "prettier --write \"src/**/*.ts\""
+    "format": "prettier --write \"src/**/*.ts\"",
+    "generate": "ts-node src/generate.ts"
   },
   "keywords": [
     "css",
