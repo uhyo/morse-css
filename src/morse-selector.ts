@@ -57,11 +57,11 @@ export const MORSE_CODE: MorseCodeMap = {
  */
 export function getMorseSelectorForChar(char: MorseChar): string {
   if (char === ".") {
-    // Dot: <span></span>
-    return "span:empty";
+    // Dot: <i></i>
+    return "i:empty";
   } else if (char === "-") {
-    // Dash: <span><span><span></span></span></span>
-    return "span:has(span:has(span:empty))";
+    // Dash: <span></span>
+    return "span:empty";
   } else {
     throw new Error(`Unknown Morse character: ${char}`);
   }

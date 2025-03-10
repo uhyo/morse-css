@@ -16,11 +16,11 @@ import { MorseChar } from "./types";
  */
 function getMorseHtmlForChar(char: MorseChar): string {
   if (char === ".") {
-    // Dot: <span></span>
-    return "<span></span>";
+    // Dot: <i></i>
+    return "<i></i>";
   } else if (char === "-") {
-    // Dash: <span><span><span></span></span></span>
-    return "<span><span><span></span></span></span>";
+    // Dash: <span></span>
+    return "<span></span>";
   } else {
     throw new Error(`Unknown Morse character: ${char}`);
   }

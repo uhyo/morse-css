@@ -2,14 +2,14 @@ import { describe, it, expect } from "vitest";
 import { getMorseSelectorForChar, getMorseSelectorForWord, MORSE_CODE } from "./morse-selector";
 
 describe("getMorseSelectorForChar", () => {
-  it("should convert a dot to span:empty", () => {
+  it("should convert a dot to i:empty", () => {
     const result = getMorseSelectorForChar(".");
-    expect(result).toBe("span:empty");
+    expect(result).toBe("i:empty");
   });
 
-  it("should convert a dash to span:has(span:has(span:empty))", () => {
+  it("should convert a dash to span:empty", () => {
     const result = getMorseSelectorForChar("-");
-    expect(result).toBe("span:has(span:has(span:empty))");
+    expect(result).toBe("span:empty");
   });
 
   it("should throw an error for unknown characters", () => {
@@ -22,7 +22,7 @@ describe("getMorseSelectorForWord", () => {
   it("should convert a single letter word", () => {
     // A = .-
     const result = getMorseSelectorForWord("A");
-    const expected = "> span:empty:first-child + span:has(span:has(span:empty))";
+    const expected = "> i:empty:first-child + span:empty";
     expect(result).toBe(expected);
   });
 
@@ -31,8 +31,8 @@ describe("getMorseSelectorForWord", () => {
     const result = getMorseSelectorForWord("SOS");
 
     // Build the expected selector for SOS
-    const dotSelector = "span:empty";
-    const dashSelector = "span:has(span:has(span:empty))";
+    const dotSelector = "i:empty";
+    const dashSelector = "span:empty";
 
     // S = ...
     const sSelector = `${dotSelector}:first-child + ${dotSelector} + ${dotSelector}`;
@@ -51,8 +51,8 @@ describe("getMorseSelectorForWord", () => {
     const result = getMorseSelectorForWord("A1");
 
     // Build the expected selector for A1
-    const dotSelector = "span:empty";
-    const dashSelector = "span:has(span:has(span:empty))";
+    const dotSelector = "i:empty";
+    const dashSelector = "span:empty";
 
     // A = .-
     const aSelector = `${dotSelector}:first-child + ${dashSelector}`;
@@ -120,9 +120,9 @@ describe("getMorseSelectorForWord", () => {
         }
 
         if (morseChar === ".") {
-          expect(selectorPart).toBe("span:empty");
+          expect(selectorPart).toBe("i:empty");
         } else if (morseChar === "-") {
-          expect(selectorPart).toBe("span:has(span:has(span:empty))");
+          expect(selectorPart).toBe("span:empty");
         }
       }
     }

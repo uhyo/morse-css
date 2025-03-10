@@ -32,8 +32,8 @@ Example pseudo-CSS:
 
 In Morse CSS, Morse code is represented in HTML using the following conventions:
 
-- **Dots** (`.`) in Morse code are represented as `<span></span>` (empty spans)
-- **Dashes** (`-`) are represented as `<span><span><span></span></span></span>` (nested spans)
+- **Dots** (`.`) in Morse code are represented as `<i></i>` (empty italic elements)
+- **Dashes** (`-`) are represented as `<span></span>` (empty spans)
 - **Spaces** between characters are represented by the adjacent sibling combinator (`+`)
 
 The converter maintains a dictionary of Morse code patterns for letters and numbers, which it uses to generate the appropriate CSS selectors.
@@ -52,10 +52,10 @@ Example transformation:
 
 /* Output: Generated CSS */
 *:has(
-  > span:empty:first-child + 
-  span:has(span:has(span:empty)) + 
-  span:has(span:has(span:empty)) + 
+  > i:empty:first-child + 
   span:empty + 
+  span:empty + 
+  i:empty + 
   /* ... rest of the Morse pattern for "BOLD" */
 ) {
   font-weight: bold;

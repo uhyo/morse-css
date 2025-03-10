@@ -121,19 +121,18 @@ describe("convertMorseCSS", () => {
 
     // S is "..." in Morse, O is "---"
     // So SOS should translate to "... --- ..."
-    // Which should be represented as span:empty selectors for dots and span:has(span:has(span:empty)) for dashes
+    // Which should be represented as i:empty for dots and span:empty for dashes
+    expect(result).toContain("i:empty");
     expect(result).toContain("span:empty");
-    expect(result).toContain("span:has(span:has(span:empty))");
 
     // Verify the specific pattern for SOS
     // S = "..." = 3 dots
     // O = "---" = 3 dashes
     // S = "..." = 3 dots
     // So we should have 3 dots, then 3 dashes, then 3 dots
-    // With the new format, we add > at the beginning and :first-child to the first span
+    // With the new format, we add > at the beginning and :first-child to the first element
     const firstChar = MORSE_CODE.S[0];
-    const firstSelector =
-      firstChar === "." ? "span:empty:first-child" : "span:has(span:has(span:empty)):first-child";
+    const firstSelector = firstChar === "." ? "i:empty:first-child" : "span:empty:first-child";
     const sosPattern = "> " + firstSelector;
 
     // Just check that the result contains the beginning of the pattern

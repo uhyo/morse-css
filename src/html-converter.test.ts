@@ -12,9 +12,9 @@ describe("convertMorseHtml", () => {
     // Check that the {BOLD} pattern is replaced
     expect(result).not.toContain("{BOLD}");
 
-    // Check that the result contains span elements
+    // Check that the result contains the new HTML elements
+    expect(result).toContain("<i></i>");
     expect(result).toContain("<span></span>");
-    expect(result).toContain("<span><span><span></span></span></span>");
   });
 
   it("should convert multiple patterns in the same HTML", () => {
@@ -25,9 +25,9 @@ describe("convertMorseHtml", () => {
     expect(result).not.toContain("{BOLD}");
     expect(result).not.toContain("{RED}");
 
-    // Check that the result contains span elements
+    // Check that the result contains the new HTML elements
+    expect(result).toContain("<i></i>");
     expect(result).toContain("<span></span>");
-    expect(result).toContain("<span><span><span></span></span></span>");
   });
 
   it("should handle patterns within HTML attributes", () => {
