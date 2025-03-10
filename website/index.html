@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Morse CSS - A Powerful Classless CSS Framework</title>
+  </head>
+  <body>
+    <header>
+      <h1>Morse CSS</h1>
+      <p>A powerful classless CSS framework with a unique approach to styling</p>
+      <div>
+        <a href="https://github.com/your-username/morse-css">GitHub</a>
+        <a href="./morse.css" download>Download morse.css</a>
+      </div>
+    </header>
+
+    <main>
+      <section id="introduction">
+        <h2>What is Morse CSS?</h2>
+        <p>
+          Morse CSS is a classless CSS framework that allows you to style your HTML without writing
+          any CSS classes. Instead of adding classes to your HTML elements, styling is determined by
+          the document structure and special Morse code patterns embedded in your markup.
+        </p>
+
+        <h3>Key Features</h3>
+        <ul>
+          <li><strong>Truly Classless:</strong> No need to add classes to your HTML elements</li>
+          <li>
+            <strong>Structure-Based Styling:</strong> Styling is computed based on document
+            structure
+          </li>
+          <li>
+            <strong>Utility-Like Control:</strong> Achieve the precision of utility frameworks like
+            Tailwind CSS, but without classes
+          </li>
+          <li>
+            <strong>Morse Code Magic:</strong> Use Morse code patterns to apply specific styles to
+            elements
+          </li>
+        </ul>
+      </section>
+
+      <section id="how-it-works">
+        <h2>How It Works</h2>
+        <p>
+          Morse CSS uses a clever approach to styling by recognizing Morse code patterns at the
+          beginning of your HTML elements:
+        </p>
+        <ul>
+          <li>
+            <strong>Dots</strong> in Morse code are represented as
+            <code>&lt;i&gt;&lt;/i&gt;</code> (empty italic elements)
+          </li>
+          <li>
+            <strong>Dashes</strong> are represented as <code>&lt;span&gt;&lt;/span&gt;</code> (empty
+            spans)
+          </li>
+        </ul>
+
+        <h3>Example</h3>
+        <p>
+          To make an element <strong>bold</strong>, you would include the Morse code for "BOLD" at
+          the beginning of the element:
+        </p>
+
+        <pre><code>&lt;p&gt;
+  &lt;!-- Morse code for BOLD: -... --- .-.. -.. --&gt;
+  &lt;span&gt;&lt;/span&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;
+  &lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;
+  &lt;i&gt;&lt;/i&gt;&lt;span&gt;&lt;/span&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;
+  &lt;span&gt;&lt;/span&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;
+  
+  This entire paragraph will be bold because the Morse code pattern at the beginning applies the
+  style to the whole element.
+&lt;/p&gt;</code></pre>
+
+        <p>
+          The Morse code <code>-... --- .-.. -..</code> (BOLD) is represented by the pattern of
+          empty spans and italics at the beginning of the element, which Morse CSS recognizes and
+          applies the corresponding style (in this case, <code>font-weight: bold</code>) to the
+          entire element.
+        </p>
+
+        <h3>Using Pseudo-Syntax</h3>
+        <p>
+          For convenience, you can also use a pseudo-syntax in your HTML that will be converted to
+          the actual Morse code pattern:
+        </p>
+
+        <pre><code>&lt;p&gt;
+  {BOLD} This paragraph will be bold.
+&lt;/p&gt;</code></pre>
+
+        <p>
+          The <code>{BOLD}</code> pseudo-syntax will be converted to the appropriate Morse code
+          pattern during the build process.
+        </p>
+      </section>
+
+      <section id="installation">
+        <h2>Installation</h2>
+
+        <h3>Direct Download</h3>
+        <p>
+          Download the CSS file directly from the
+          <a href="./morse.css" download>download link</a> or from the
+          <a href="https://github.com/your-username/morse-css/releases">GitHub releases page</a>.
+        </p>
+
+        <h3>Including in Your HTML</h3>
+        <pre><code>&lt;link rel="stylesheet" href="path/to/morse.css"&gt;</code></pre>
+      </section>
+
+      <section id="usage">
+        <h2>Usage</h2>
+
+        <h3>1. Using the pre-built CSS</h3>
+        <p>Include the Morse CSS stylesheet in your HTML:</p>
+        <pre><code>&lt;link rel="stylesheet" href="path/to/morse.css"&gt;</code></pre>
+
+        <h3>2. Using the converter</h3>
+        <p>If you want to create your own custom Morse CSS file, you can use the converter:</p>
+        <pre><code># Using the CLI
+morse-css src/css/your-file.pcss output/your-output.css</code></pre>
+
+        <h3>3. Creating a custom pseudo-CSS file</h3>
+        <p>Create a file with your desired styles using the <code>:morse()</code> selector:</p>
+        <pre><code>/* Make elements bold */
+*:morse(BOLD) {
+  font-weight: bold;
+}
+
+/* Make elements red */
+*:morse(RED) {
+  color: red;
+}
+
+/* Make elements italic */
+*:morse(ITALIC) {
+  font-style: italic;
+}</code></pre>
+      </section>
+
+      <section id="available-patterns">
+        <h2>Available Patterns</h2>
+        <p>Here are some common patterns included in the default Morse CSS:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Pattern</th>
+              <th>Morse Code</th>
+              <th>CSS Property</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>BOLD</td>
+              <td>-... --- .-.. -..</td>
+              <td>font-weight: bold</td>
+            </tr>
+            <tr>
+              <td>RED</td>
+              <td>.-. . -..</td>
+              <td>color: red</td>
+            </tr>
+            <tr>
+              <td>ITALIC</td>
+              <td>.. - .- .-.. .. -.-.</td>
+              <td>font-style: italic</td>
+            </tr>
+            <tr>
+              <td>UNDERLINE</td>
+              <td>..- -. -.. . .-. .-.. .. -. .</td>
+              <td>text-decoration: underline</td>
+            </tr>
+            <tr>
+              <td>LARGE</td>
+              <td>.-.. .- .-. --. .</td>
+              <td>font-size: 1.5em</td>
+            </tr>
+            <tr>
+              <td>CENTER</td>
+              <td>-.-. . -. - . .-.</td>
+              <td>text-align: center</td>
+            </tr>
+            <tr>
+              <td>BLUE</td>
+              <td>-... .-.. ..- .</td>
+              <td>background-color: blue; color: white</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="browser-support">
+        <h2>Browser Support</h2>
+        <p>
+          Morse CSS relies on modern CSS selectors like <code>:has()</code>. Check browser
+          compatibility before using in production:
+        </p>
+        <ul>
+          <li>Chrome 105+</li>
+          <li>Safari 15.4+</li>
+          <li>Firefox 121+</li>
+          <li>Edge 105+</li>
+        </ul>
+      </section>
+
+      <section id="documentation">
+        <h2>Documentation</h2>
+        <p>
+          For more detailed documentation, please visit the
+          <a href="https://github.com/your-username/morse-css">GitHub repository</a>.
+        </p>
+        <p>
+          If you'd like to contribute to Morse CSS, please see the
+          <a href="https://github.com/your-username/morse-css/blob/main/CONTRIBUTING.md"
+            >contributing guidelines</a
+          >.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <p>Morse CSS - A powerful classless CSS framework with Morse code patterns</p>
+      <p>
+        Licensed under the
+        <a href="https://github.com/your-username/morse-css/blob/main/LICENSE">MIT License</a>
+      </p>
+      <p>&copy; 2025 Morse CSS Contributors</p>
+    </footer>
+  </body>
+</html>
