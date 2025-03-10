@@ -56,5 +56,8 @@ export function convertMorseCSS(pseudoCSS: string): string {
 // Export the Morse code mapping and selector functions
 export { MORSE_CODE, getMorseSelectorForWord } from "./morse-selector";
 
+// Export HTML converter
+export { convertMorseHtml } from "./html-converter";
+
 // Export types
 export * from "./types";

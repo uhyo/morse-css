@@ -5,17 +5,19 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "bin": {
-    "morse-css": "dist/cli.js"
+    "morse-css": "dist/cli.js",
+    "morse-html": "dist/html-cli.js"
   },
   "scripts": {
-    "build": "tsc && chmod +x dist/cli.js",
+    "build": "tsc && chmod +x dist/cli.js && chmod +x dist/html-cli.js",
     "dev": "ts-node src/index.ts",
     "start": "ts-node src/cli.ts",
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "eslint src/**/*.ts",
     "format": "prettier --write \"src/**/*.ts\"",
-    "convert": "ts-node src/cli.ts"
+    "convert": "ts-node src/cli.ts",
+    "convert:html": "ts-node src/html-cli.ts"
   },
   "keywords": [
     "css",
