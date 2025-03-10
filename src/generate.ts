@@ -8,16 +8,16 @@
 
 import fs from "fs";
 import path from "path";
-import { convertMorseCSS } from "./index";
-import { convertMorseHtml } from "./html-converter";
+import { convertMorseCSS } from "./core/index";
+import { convertMorseHtml } from "./core/html-converter";
 
 // Paths
-const PSEUDO_CSS_PATH = path.join(process.cwd(), "pseudo-css", "example.pcss");
-const CSS_OUTPUT_PATH = path.join(process.cwd(), "dist", "morse.css");
-const PSEUDO_HTML_PATH = path.join(process.cwd(), "examples", "pseudo-syntax.html");
-const HTML_OUTPUT_PATH = path.join(process.cwd(), "examples", "converted.html");
+const PSEUDO_CSS_PATH = path.join(process.cwd(), "src", "css", "example.pcss");
+const CSS_OUTPUT_PATH = path.join(process.cwd(), "output", "morse.css");
+const PSEUDO_HTML_PATH = path.join(process.cwd(), "src", "html", "pseudo-syntax.html");
+const HTML_OUTPUT_PATH = path.join(process.cwd(), "output", "converted.html");
 
-// Ensure dist directory exists
+// Ensure output directory exists
 if (!fs.existsSync(path.dirname(CSS_OUTPUT_PATH))) {
   fs.mkdirSync(path.dirname(CSS_OUTPUT_PATH), { recursive: true });
 }
@@ -38,7 +38,10 @@ try {
 console.log(`\nGenerating HTML from ${PSEUDO_HTML_PATH}...`);
 try {
   const pseudoHTML = fs.readFileSync(PSEUDO_HTML_PATH, "utf-8");
-  const html = convertMorseHtml(pseudoHTML);
+  // Convert the Morse code patterns
+  let html = convertMorseHtml(pseudoHTML);
+  // Fix the CSS path for the output file
+  html = html.replace("../output/morse.css", "morse.css");
   fs.writeFileSync(HTML_OUTPUT_PATH, html);
   console.log(`HTML written to ${HTML_OUTPUT_PATH}`);
 } catch (error) {

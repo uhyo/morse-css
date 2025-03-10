@@ -27,17 +27,21 @@ Thank you for your interest in contributing to Morse CSS! This document provides
 
 ```
 morse-css/
-├── src/                  # Source code
-│   ├── parser/           # Pseudo-CSS parser implementation
-│   ├── translator/       # Morse code translator
-│   ├── generator/        # CSS generator
-│   ├── types.ts          # TypeScript type definitions
-│   ├── index.ts          # Main entry point
-│   └── cli.ts            # Command-line interface
-├── examples/             # Example usage
-├── dist/                 # Generated CSS files (created by build)
-├── tests/                # Test cases
-└── pseudo-css/           # Source pseudo-CSS files
+├── src/                  # All source files
+│   ├── core/             # Core framework code
+│   │   ├── index.ts      # Main implementation
+│   │   ├── morse-selector.ts # Morse code to CSS selector conversion
+│   │   ├── html-converter.ts # HTML pseudo-syntax conversion
+│   │   └── types.ts      # Type definitions
+│   ├── css/              # Source pseudo-CSS files
+│   │   └── example.pcss  # Source for morse.css
+│   └── html/             # Source HTML files
+│       └── pseudo-syntax.html # Example with pseudo-syntax
+├── output/               # Generated files (created by build)
+│   ├── morse.css         # Main CSS output
+│   └── converted.html    # Generated HTML file
+└── examples/             # Example usage
+    └── index.html        # Example with raw Morse HTML
 ```
 
 ## Development Workflow
@@ -54,7 +58,7 @@ morse-css/
    ```
 5. Try your changes with an example:
    ```bash
-   pnpm convert pseudo-css/example.pcss dist/example.css
+   pnpm convert src/css/example.pcss output/example.css
    ```
 
 ## Commands
@@ -127,7 +131,7 @@ To build the project:
 pnpm build
 ```
 
-This will compile the TypeScript code to JavaScript in the `dist/` directory.
+Since we use `noEmit` in TypeScript configuration, no JavaScript files are generated. The TypeScript code is run directly using `ts-node`.
 
 ## License
 

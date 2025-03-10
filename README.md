@@ -85,10 +85,10 @@ If you want to create your own custom Morse CSS file, you can use the converter:
 
 ```bash
 # Using npx
-npx morse-css pseudo-css/your-file.pcss dist/your-output.css
+npx morse-css src/css/your-file.pcss output/your-output.css
 
 # If installed globally
-morse-css pseudo-css/your-file.pcss dist/your-output.css
+morse-css src/css/your-file.pcss output/your-output.css
 ```
 
 ### 3. Creating a custom pseudo-CSS file

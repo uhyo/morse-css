@@ -72,30 +72,32 @@ The `+` (adjacent sibling combinator) ensures the spans appear in the correct se
 
 The build process is automated with the `generate` script, which:
 
-- Converts the pseudo-CSS file to the main CSS output (`morse.css`)
-- Converts the pseudo-syntax HTML example to its final form with Morse code patterns
+- Converts the pseudo-CSS file from `src/css/` to the main CSS output (`output/morse.css`)
+- Converts the pseudo-syntax HTML example from `src/html/` to its final form with Morse code patterns (`output/converted.html`)
 
 ## Usage
 
-Morse CSS provides a CSS file (`morse.css`) that can be included in HTML documents to apply styles based on Morse code patterns. The framework is designed to be used directly without requiring any build steps by the end user.
+Morse CSS provides a CSS file (`output/morse.css`) that can be included in HTML documents to apply styles based on Morse code patterns. The framework is designed to be used directly without requiring any build steps by the end user.
 
 ## File Structure
 
 ```
 morse-css/
-├── src/                  # Source code
-│   ├── index.ts          # Main implementation
-│   ├── morse-selector.ts # Morse code to CSS selector conversion
-│   ├── html-converter.ts # HTML pseudo-syntax conversion
-│   └── types.ts          # Type definitions
-├── examples/             # Example usage
-│   ├── index.html        # Example with raw Morse HTML
-│   ├── pseudo-syntax.html # Example with pseudo-syntax
-│   └── converted.html    # Generated from pseudo-syntax
-├── dist/                 # Generated files
-│   └── morse.css         # Main CSS output
-└── pseudo-css/           # Source pseudo-CSS files
-    └── example.pcss      # Source for morse.css
+├── src/                  # All source files
+│   ├── core/             # Core framework code
+│   │   ├── index.ts      # Main implementation
+│   │   ├── morse-selector.ts # Morse code to CSS selector conversion
+│   │   ├── html-converter.ts # HTML pseudo-syntax conversion
+│   │   └── types.ts      # Type definitions
+│   ├── css/              # Source pseudo-CSS files
+│   │   └── example.pcss  # Source for morse.css
+│   └── html/             # Source HTML files
+│       └── pseudo-syntax.html # Example with pseudo-syntax
+├── output/               # Generated files
+│   ├── morse.css         # Main CSS output
+│   └── converted.html    # Generated HTML file
+└── examples/             # Example usage
+    └── index.html        # Example with raw Morse HTML
 ```
 
 ## Technical Considerations
