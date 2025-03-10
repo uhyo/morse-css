@@ -95,6 +95,12 @@ export function getMorseSelectorForWord(morseWord: string): string {
     // This is handled by the adjacent sibling combinator (+)
   }
 
+  // Add :first-child to the first span
+  if (selectorParts.length > 0) {
+    selectorParts[0] = selectorParts[0] + ":first-child";
+  }
+
   // Join the selector parts with the adjacent sibling combinator
-  return selectorParts.join(" + ");
+  // Add the > prefix to indicate direct children
+  return "> " + selectorParts.join(" + ");
 }

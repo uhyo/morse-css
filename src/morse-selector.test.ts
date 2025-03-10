@@ -22,7 +22,7 @@ describe("getMorseSelectorForWord", () => {
   it("should convert a single letter word", () => {
     // A = .-
     const result = getMorseSelectorForWord("A");
-    const expected = "span:empty + span:has(span:has(span:empty))";
+    const expected = "> span:empty:first-child + span:has(span:has(span:empty))";
     expect(result).toBe(expected);
   });
 
@@ -35,12 +35,13 @@ describe("getMorseSelectorForWord", () => {
     const dashSelector = "span:has(span:has(span:empty))";
 
     // S = ...
-    const sSelector = `${dotSelector} + ${dotSelector} + ${dotSelector}`;
+    const sSelector = `${dotSelector}:first-child + ${dotSelector} + ${dotSelector}`;
     // O = ---
     const oSelector = `${dashSelector} + ${dashSelector} + ${dashSelector}`;
 
     // SOS = ... --- ...
-    const expected = `${sSelector} + ${oSelector} + ${sSelector}`;
+    // Note: Only the first span gets :first-child
+    const expected = `> ${dotSelector}:first-child + ${dotSelector} + ${dotSelector} + ${dashSelector} + ${dashSelector} + ${dashSelector} + ${dotSelector} + ${dotSelector} + ${dotSelector}`;
 
     expect(result).toBe(expected);
   });
@@ -54,12 +55,12 @@ describe("getMorseSelectorForWord", () => {
     const dashSelector = "span:has(span:has(span:empty))";
 
     // A = .-
-    const aSelector = `${dotSelector} + ${dashSelector}`;
+    const aSelector = `${dotSelector}:first-child + ${dashSelector}`;
     // 1 = .----
     const oneSelector = `${dotSelector} + ${dashSelector} + ${dashSelector} + ${dashSelector} + ${dashSelector}`;
 
     // A1 = .- .----
-    const expected = `${aSelector} + ${oneSelector}`;
+    const expected = `> ${aSelector} + ${oneSelector}`;
 
     expect(result).toBe(expected);
   });
@@ -97,7 +98,13 @@ describe("getMorseSelectorForWord", () => {
 
     for (const { word, morse, parts } of testCases) {
       const result = getMorseSelectorForWord(word);
-      const resultParts = result.split(" + ");
+
+      // Check that the result starts with >
+      expect(result.startsWith("> ")).toBe(true);
+
+      // Remove the > prefix for part checking
+      const resultWithoutPrefix = result.substring(2);
+      const resultParts = resultWithoutPrefix.split(" + ");
 
       // Check the number of parts matches the Morse code length
       expect(resultParts.length).toBe(parts);
@@ -105,7 +112,12 @@ describe("getMorseSelectorForWord", () => {
       // Check each part corresponds to the correct Morse character
       for (let i = 0; i < morse.length; i++) {
         const morseChar = morse[i];
-        const selectorPart = resultParts[i];
+        let selectorPart = resultParts[i];
+
+        // Remove :first-child from the first part if present
+        if (i === 0 && selectorPart.includes(":first-child")) {
+          selectorPart = selectorPart.replace(":first-child", "");
+        }
 
         if (morseChar === ".") {
           expect(selectorPart).toBe("span:empty");

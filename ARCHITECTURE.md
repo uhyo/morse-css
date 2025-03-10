@@ -52,7 +52,7 @@ Example transformation:
 
 /* Output: Generated CSS */
 *:has(
-  span:empty + 
+  > span:empty:first-child + 
   span:has(span:has(span:empty)) + 
   span:has(span:has(span:empty)) + 
   span:empty + 
