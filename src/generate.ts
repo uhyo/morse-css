@@ -8,20 +8,25 @@
 
 import fs from "fs";
 import path from "path";
-import { convertMorseCSS } from "./core/index";
-import { convertMorseHtml } from "./core/html-converter";
+import { convertMorseCSS } from "./index";
+import { convertMorseHtml } from "./html-converter";
 
 // Paths
-const PSEUDO_CSS_PATH = path.join(process.cwd(), "src", "css", "example.pcss");
-const CSS_OUTPUT_PATH = path.join(process.cwd(), "output", "morse.css");
+const PSEUDO_CSS_PATH = path.join(process.cwd(), "src", "css", "morse.pcss");
+const CSS_OUTPUT_PATH = path.join(process.cwd(), "website", "morse.css");
 const PSEUDO_HTML_PATH = path.join(process.cwd(), "src", "html", "pseudo-syntax.html");
-const HTML_OUTPUT_PATH = path.join(process.cwd(), "output", "converted.html");
-const WEBSITE_PSEUDO_HTML_PATH = path.join(process.cwd(), "website", "index.pseudo.html");
+const HTML_OUTPUT_PATH = path.join(process.cwd(), "website", "examples", "converted.html");
+const WEBSITE_PSEUDO_HTML_PATH = path.join(process.cwd(), "src", "website", "index.pseudo.html");
 const WEBSITE_HTML_OUTPUT_PATH = path.join(process.cwd(), "website", "index.html");
 
 // Ensure output directory exists
 if (!fs.existsSync(path.dirname(CSS_OUTPUT_PATH))) {
   fs.mkdirSync(path.dirname(CSS_OUTPUT_PATH), { recursive: true });
+}
+
+// Ensure examples directory exists
+if (!fs.existsSync(path.dirname(HTML_OUTPUT_PATH))) {
+  fs.mkdirSync(path.dirname(HTML_OUTPUT_PATH), { recursive: true });
 }
 
 // Generate CSS
@@ -43,7 +48,7 @@ try {
   // Convert the Morse code patterns
   let html = convertMorseHtml(pseudoHTML);
   // Fix the CSS path for the output file
-  html = html.replace("../output/morse.css", "morse.css");
+  html = html.replace("../output/morse.css", "../morse.css");
   fs.writeFileSync(HTML_OUTPUT_PATH, html);
   console.log(`HTML written to ${HTML_OUTPUT_PATH}`);
 } catch (error) {

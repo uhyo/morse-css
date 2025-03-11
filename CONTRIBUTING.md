@@ -28,20 +28,21 @@ Thank you for your interest in contributing to Morse CSS! This document provides
 ```
 morse-css/
 ├── src/                  # All source files
-│   ├── core/             # Core framework code
-│   │   ├── index.ts      # Main implementation
-│   │   ├── morse-selector.ts # Morse code to CSS selector conversion
-│   │   ├── html-converter.ts # HTML pseudo-syntax conversion
-│   │   └── types.ts      # Type definitions
+│   ├── index.ts          # Main implementation
+│   ├── morse-selector.ts # Morse code to CSS selector conversion
+│   ├── html-converter.ts # HTML pseudo-syntax conversion
+│   ├── types.ts          # Type definitions
 │   ├── css/              # Source pseudo-CSS files
-│   │   └── example.pcss  # Source for morse.css
-│   └── html/             # Source HTML files
-│       └── pseudo-syntax.html # Example with pseudo-syntax
-├── output/               # Generated files (created by build)
-│   ├── morse.css         # Main CSS output
-│   └── converted.html    # Generated HTML file
-└── examples/             # Example usage
-    └── index.html        # Example with raw Morse HTML
+│   │   └── morse.pcss    # Source for morse.css
+│   ├── html/             # Source HTML files
+│   │   └── pseudo-syntax.html # Example with pseudo-syntax
+│   └── website/          # Website source files
+│       └── index.pseudo.html # Source for website index.html
+└── website/              # Generated files and website
+    ├── index.html        # Main website HTML
+    ├── morse.css         # Main CSS output
+    └── examples/         # Example usage
+        └── converted.html # Generated HTML file from pseudo-syntax.html
 ```
 
 ## Development Workflow
@@ -58,7 +59,7 @@ morse-css/
    ```
 5. Try your changes with an example:
    ```bash
-   pnpm convert src/css/example.pcss output/example.css
+   pnpm convert src/css/morse.pcss website/example.css
    ```
 
 ## Commands
