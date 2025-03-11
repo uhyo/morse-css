@@ -37,10 +37,13 @@
         <h3>Gap Example</h3>
         <div style="border: 1px dashed #ccc; margin: 20px 0">
           <div>
-            {FLEX}{GAP2}
-            <div style="border: 1px solid #999; padding: 10px">Item 1</div>
-            <div style="border: 1px solid #999; padding: 10px">Item 2</div>
-            <div style="border: 1px solid #999; padding: 10px">Item 3</div>
+            {FLEX}
+            <div>
+              {GAP2}
+              <div style="border: 1px solid #999; padding: 10px">Item 1</div>
+              <div style="border: 1px solid #999; padding: 10px">Item 2</div>
+              <div style="border: 1px solid #999; padding: 10px">Item 3</div>
+            </div>
           </div>
         </div>
       </section>
@@ -51,19 +54,28 @@
         <h3>Flex Layout Examples</h3>
         <div style="border: 1px dashed #ccc; margin-bottom: 10px">
           <div>
-            {FLEXROW}{BETWEEN}{GAP1}
-            <div style="border: 1px solid #999; padding: 10px">Left</div>
-            <div style="border: 1px solid #999; padding: 10px">Center</div>
-            <div style="border: 1px solid #999; padding: 10px">Right</div>
+            {FLEXROW}
+            <div>
+              {BETWEEN}
+              <div>
+                {GAP1}
+                <div style="border: 1px solid #999; padding: 10px">Left</div>
+                <div style="border: 1px solid #999; padding: 10px">Center</div>
+                <div style="border: 1px solid #999; padding: 10px">Right</div>
+              </div>
+            </div>
           </div>
         </div>
 
         <div style="border: 1px dashed #ccc; margin-bottom: 10px">
           <div>
-            {FLEXCOL}{GAP1}
-            <div style="border: 1px solid #999; padding: 10px">Top</div>
-            <div style="border: 1px solid #999; padding: 10px">Middle</div>
-            <div style="border: 1px solid #999; padding: 10px">Bottom</div>
+            {FLEXCOL}
+            <div>
+              {GAP1}
+              <div style="border: 1px solid #999; padding: 10px">Top</div>
+              <div style="border: 1px solid #999; padding: 10px">Middle</div>
+              <div style="border: 1px solid #999; padding: 10px">Bottom</div>
+            </div>
           </div>
         </div>
 
@@ -85,18 +97,54 @@
         <h2>Size Utilities</h2>
 
         <div style="border: 1px dashed #ccc; margin-bottom: 10px">
-          <div>{FULL}{BGBLUE}{PADDING2} This is a full-width element.</div>
+          <div>
+            {FULL}
+            <div>
+              {BGBLUE}
+              <div>{PADDING2} This is a full-width element.</div>
+            </div>
+          </div>
         </div>
 
         <div style="border: 1px dashed #ccc; margin-bottom: 10px; display: flex">
-          <div>{HALF}{BGGREEN}{PADDING2} This is half-width.</div>
-          <div>{HALF}{BGRED}{PADDING2} This is half-width.</div>
+          <div>
+            {HALF}
+            <div>
+              {BGGREEN}
+              <div>{PADDING2} This is half-width.</div>
+            </div>
+          </div>
+          <div>
+            {HALF}
+            <div>
+              {BGRED}
+              <div>{PADDING2} This is half-width.</div>
+            </div>
+          </div>
         </div>
 
         <div style="border: 1px dashed #ccc; margin-bottom: 10px; display: flex">
-          <div>{THIRD}{BGYELLOW}{PADDING2} Third</div>
-          <div>{THIRD}{BGPURPLE}{PADDING2} Third</div>
-          <div>{THIRD}{BGORANGE}{PADDING2} Third</div>
+          <div>
+            {THIRD}
+            <div>
+              {BGYELLOW}
+              <div>{PADDING2} Third</div>
+            </div>
+          </div>
+          <div>
+            {THIRD}
+            <div>
+              {BGPURPLE}
+              <div>{PADDING2} Third</div>
+            </div>
+          </div>
+          <div>
+            {THIRD}
+            <div>
+              {BGORANGE}
+              <div>{PADDING2} Third</div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -104,23 +152,44 @@
         <h2>Border Utilities</h2>
 
         <div style="margin-bottom: 10px">
-          <div>{BORDER}{PADDING2} This element has a standard border.</div>
+          <div>
+            {BORDER}
+            <div>{PADDING2} This element has a standard border.</div>
+          </div>
         </div>
 
         <div style="margin-bottom: 10px">
-          <div>{BORDERTHIN}{PADDING2} This element has a thin border.</div>
+          <div>
+            {BORDERTHIN}
+            <div>{PADDING2} This element has a thin border.</div>
+          </div>
         </div>
 
         <div style="margin-bottom: 10px">
-          <div>{BORDERTHICK}{PADDING2} This element has a thick border.</div>
+          <div>
+            {BORDERTHICK}
+            <div>{PADDING2} This element has a thick border.</div>
+          </div>
         </div>
 
         <div style="margin-bottom: 10px">
-          <div>{BORDER}{ROUND}{PADDING2} This element has rounded corners.</div>
+          <div>
+            {BORDER}
+            <div>
+              {ROUND}
+              <div>{PADDING2} This element has rounded corners.</div>
+            </div>
+          </div>
         </div>
 
         <div style="margin-bottom: 10px">
-          <div>{BORDER}{ROUNDFULL}{PADDING2} This element has fully rounded corners.</div>
+          <div>
+            {BORDER}
+            <div>
+              {ROUNDFULL}
+              <div>{PADDING2} This element has fully rounded corners.</div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -151,27 +220,90 @@
         <p>{PURPLE} This text is purple (PURPLE).</p>
         <p>{ORANGE} This text is orange (ORANGE).</p>
 
-        <p>{BGRED}{PADDING2} This has a red background (BGRED).</p>
-        <p>{BGGREEN}{PADDING2} This has a green background (BGGREEN).</p>
-        <p>{BGBLUE}{PADDING2} This has a blue background (BGBLUE).</p>
-        <p>{BGYELLOW}{PADDING2} This has a yellow background (BGYELLOW).</p>
-        <p>{BGPURPLE}{PADDING2} This has a purple background (BGPURPLE).</p>
-        <p>{BGORANGE}{PADDING2} This has an orange background (BGORANGE).</p>
+        <p>
+          {BGRED}
+          <span>{PADDING2} This has a red background (BGRED).</span>
+        </p>
+        <p>
+          {BGGREEN}
+          <span>{PADDING2} This has a green background (BGGREEN).</span>
+        </p>
+        <p>
+          {BGBLUE}
+          <span>{PADDING2} This has a blue background (BGBLUE).</span>
+        </p>
+        <p>
+          {BGYELLOW}
+          <span>{PADDING2} This has a yellow background (BGYELLOW).</span>
+        </p>
+        <p>
+          {BGPURPLE}
+          <span>{PADDING2} This has a purple background (BGPURPLE).</span>
+        </p>
+        <p>
+          {BGORANGE}
+          <span>{PADDING2} This has an orange background (BGORANGE).</span>
+        </p>
       </section>
 
       <section>
         <h2>Combined Examples</h2>
 
         <div>
-          {FLEXCOL}{GAP3}{PADDING3}{BORDER}{ROUND}{BGBLUE}
+          {FLEXCOL}
           <div>
-            {PADDING2}{BGWHITE}{BORDER}{ROUND}{BLACK} This is a card with multiple utilities.
-          </div>
-          <div>
-            {PADDING2}{BGWHITE}{BORDER}{ROUND}{BLACK} This is another card with multiple utilities.
-          </div>
-          <div>
-            {PADDING2}{BGWHITE}{BORDER}{ROUND}{BLACK} This is a third card with multiple utilities.
+            {GAP3}
+            <div>
+              {PADDING3}
+              <div>
+                {BORDER}
+                <div>
+                  {ROUND}
+                  <div>
+                    {BGBLUE}
+                    <div>
+                      {PADDING2}
+                      <div>
+                        {BGWHITE}
+                        <div>
+                          {BORDER}
+                          <div>
+                            {ROUND}
+                            <div>{BLACK} This is a card with multiple utilities.</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      {PADDING2}
+                      <div>
+                        {BGWHITE}
+                        <div>
+                          {BORDER}
+                          <div>
+                            {ROUND}
+                            <div>{BLACK} This is another card with multiple utilities.</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      {PADDING2}
+                      <div>
+                        {BGWHITE}
+                        <div>
+                          {BORDER}
+                          <div>
+                            {ROUND}
+                            <div>{BLACK} This is a third card with multiple utilities.</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
