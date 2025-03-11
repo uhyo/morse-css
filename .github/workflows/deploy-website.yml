@@ -30,10 +30,7 @@ jobs:
       - name: Build Morse CSS
         run: pnpm build
 
-      - name: Copy CSS to website directory
-        run: |
-          mkdir -p website
-          cp output/morse.css website/
+      # No need to copy CSS to website directory as it's now generated directly there
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
