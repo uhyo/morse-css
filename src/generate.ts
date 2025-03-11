@@ -16,6 +16,13 @@ const PSEUDO_CSS_PATH = path.join(process.cwd(), "src", "css", "morse.pcss");
 const CSS_OUTPUT_PATH = path.join(process.cwd(), "website", "morse.css");
 const PSEUDO_HTML_PATH = path.join(process.cwd(), "src", "html", "pseudo-syntax.html");
 const HTML_OUTPUT_PATH = path.join(process.cwd(), "website", "examples", "converted.html");
+const UTILITY_EXAMPLES_HTML_PATH = path.join(process.cwd(), "src", "html", "utility-examples.html");
+const UTILITY_EXAMPLES_OUTPUT_PATH = path.join(
+  process.cwd(),
+  "website",
+  "examples",
+  "utility-examples.html"
+);
 const WEBSITE_PSEUDO_HTML_PATH = path.join(process.cwd(), "src", "website", "index.pseudo.html");
 const WEBSITE_HTML_OUTPUT_PATH = path.join(process.cwd(), "website", "index.html");
 
@@ -54,6 +61,22 @@ try {
 } catch (error) {
   console.error(`Error generating HTML: ${(error as Error).message}`);
   process.exit(1);
+}
+
+// Generate Utility Examples HTML
+console.log(`\nGenerating Utility Examples HTML from ${UTILITY_EXAMPLES_HTML_PATH}...`);
+try {
+  const utilityExamplesHTML = fs.readFileSync(UTILITY_EXAMPLES_HTML_PATH, "utf-8");
+  // Convert the Morse code patterns
+  let html = convertMorseHtml(utilityExamplesHTML);
+  // Fix the CSS path for the output file
+  html = html.replace("../output/morse.css", "../morse.css");
+  fs.writeFileSync(UTILITY_EXAMPLES_OUTPUT_PATH, html);
+  console.log(`Utility Examples HTML written to ${UTILITY_EXAMPLES_OUTPUT_PATH}`);
+} catch (error) {
+  console.error(`Error generating Utility Examples HTML: ${(error as Error).message}`);
+  // Don't exit the process, just log the error and continue
+  console.error("Continuing with other generation tasks...");
 }
 
 // Generate Website HTML

@@ -1,13 +1,8 @@
-/* Example pseudo-CSS file for Morse CSS */
+/* ===== TEXT FORMATTING ===== */
 
 /* Make elements bold */
 *:morse(BOLD) {
   font-weight: bold;
-}
-
-/* Make elements red */
-*:morse(RED) {
-  color: red;
 }
 
 /* Make elements italic */
@@ -20,23 +15,282 @@
   text-decoration: underline;
 }
 
-/* Make elements larger */
+/* Text decoration variants */
+*:morse(STRIKE) {
+  text-decoration: line-through;
+}
+
+*:morse(OVERLINE) {
+  text-decoration: overline;
+}
+
+/* Font sizes */
+*:morse(SMALL) {
+  font-size: 0.875em;
+}
+
+*:morse(MEDIUM) {
+  font-size: 1em;
+}
+
 *:morse(LARGE) {
   font-size: 1.5em;
 }
+
+*:morse(XLARGE) {
+  font-size: 2em;
+}
+
+*:morse(XXLARGE) {
+  font-size: 3em;
+}
+
+/* ===== TEXT ALIGNMENT ===== */
 
 /* Make elements centered */
 *:morse(CENTER) {
   text-align: center;
 }
 
+*:morse(LEFT) {
+  text-align: left;
+}
+
+*:morse(RIGHT) {
+  text-align: right;
+}
+
+/* ===== DISPLAY ===== */
+
 /* Make elements hidden */
 *:morse(HIDE) {
   display: none;
 }
 
-/* Make elements with a blue background */
+/* ===== COLORS ===== */
+
+/* Text colors */
+*:morse(RED) {
+  color: red;
+}
+
+*:morse(GREEN) {
+  color: green;
+}
+
 *:morse(BLUE) {
+  color: blue;
+}
+
+*:morse(YELLOW) {
+  color: yellow;
+}
+
+*:morse(PURPLE) {
+  color: purple;
+}
+
+*:morse(ORANGE) {
+  color: orange;
+}
+
+*:morse(BLACK) {
+  color: black;
+}
+
+*:morse(WHITE) {
+  color: white;
+}
+
+*:morse(GRAY) {
+  color: gray;
+}
+
+/* Background colors */
+*:morse(BGRED) {
+  background-color: red;
+}
+
+*:morse(BGGREEN) {
+  background-color: green;
+}
+
+*:morse(BGBLUE) {
   background-color: blue;
   color: white;
+}
+
+*:morse(BGYELLOW) {
+  background-color: yellow;
+}
+
+*:morse(BGPURPLE) {
+  background-color: purple;
+  color: white;
+}
+
+*:morse(BGORANGE) {
+  background-color: orange;
+}
+
+*:morse(BGBLACK) {
+  background-color: black;
+  color: white;
+}
+
+*:morse(BGWHITE) {
+  background-color: white;
+}
+
+*:morse(BGGRAY) {
+  background-color: gray;
+  color: white;
+}
+
+/* ===== SPACING ===== */
+
+/* Padding utilities */
+*:morse(PADDING1) {
+  padding: 4px;
+}
+
+*:morse(PADDING2) {
+  padding: 8px;
+}
+
+*:morse(PADDING3) {
+  padding: 16px;
+}
+
+*:morse(PADDING4) {
+  padding: 24px;
+}
+
+*:morse(PADDING5) {
+  padding: 32px;
+}
+
+/* Margin utilities */
+*:morse(MARGIN1) {
+  margin: 4px;
+}
+
+*:morse(MARGIN2) {
+  margin: 8px;
+}
+
+*:morse(MARGIN3) {
+  margin: 16px;
+}
+
+*:morse(MARGIN4) {
+  margin: 24px;
+}
+
+*:morse(MARGIN5) {
+  margin: 32px;
+}
+
+/* Gap utilities for flex/grid layouts */
+*:morse(GAP1) {
+  gap: 4px;
+}
+
+*:morse(GAP2) {
+  gap: 8px;
+}
+
+*:morse(GAP3) {
+  gap: 16px;
+}
+
+/* ===== LAYOUT ===== */
+
+/* Flex layouts */
+*:morse(FLEX) {
+  display: flex;
+}
+
+*:morse(FLEXROW) {
+  display: flex;
+  flex-direction: row;
+}
+
+*:morse(FLEXCOL) {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Grid layout */
+*:morse(GRID) {
+  display: grid;
+}
+
+/* Alignment utilities */
+*:morse(START) {
+  justify-content: flex-start;
+}
+
+*:morse(END) {
+  justify-content: flex-end;
+}
+
+*:morse(BETWEEN) {
+  justify-content: space-between;
+}
+
+*:morse(AROUND) {
+  justify-content: space-around;
+}
+
+/* ===== SIZE ===== */
+
+/* Width utilities */
+*:morse(FULL) {
+  width: 100%;
+}
+
+*:morse(HALF) {
+  width: 50%;
+}
+
+*:morse(THIRD) {
+  width: 33.333%;
+}
+
+*:morse(QUARTER) {
+  width: 25%;
+}
+
+/* Height utilities */
+*:morse(TALL) {
+  height: 100%;
+}
+
+*:morse(SHORT) {
+  height: 50%;
+}
+
+/* ===== BORDERS ===== */
+
+/* Border utilities */
+*:morse(BORDER) {
+  border: 1px solid currentColor;
+}
+
+*:morse(BORDERTHIN) {
+  border: 0.5px solid currentColor;
+}
+
+*:morse(BORDERTHICK) {
+  border: 2px solid currentColor;
+}
+
+/* Border radius utilities */
+*:morse(ROUND) {
+  border-radius: 4px;
+}
+
+*:morse(ROUNDFULL) {
+  border-radius: 9999px;
 }
