@@ -108,6 +108,34 @@ morse-css/
 
 The generated CSS uses complex selectors to match Morse code patterns. Care must be taken to ensure these selectors are efficient and don't cause performance issues in browsers.
 
+### One Pattern Per Element Limitation
+
+An important technical limitation of Morse CSS is that **only one Morse pattern can be applied per HTML element**. This is due to how the CSS selectors are generated and how the `:has()` selector works.
+
+When multiple patterns are included at the beginning of an element, only the first pattern will be recognized and applied. This is because each pattern is designed to match from the first child element, and the CSS selector can only match one pattern at a time.
+
+To apply multiple styles to an element, developers need to use nested elements, with each element having a single pattern:
+
+```html
+<!-- Only the first pattern (BORDER) will be applied -->
+<div>
+  <!-- Morse code for BORDER followed by Morse code for PADDING2 -->
+  <span></span>...<span></span>... This will only have a border.
+</div>
+
+<!-- Both patterns will be applied through nesting -->
+<div>
+  <!-- Morse code for BORDER -->
+  <span></span>...
+  <div>
+    <!-- Morse code for PADDING2 -->
+    <span></span>... This will have both a border and padding.
+  </div>
+</div>
+```
+
+This limitation should be clearly documented for users and considered when designing new features or enhancements.
+
 ### Browser Compatibility
 
 The implementation relies heavily on the CSS `:has()` selector, which is a relatively new feature. Browser compatibility should be carefully considered and documented.

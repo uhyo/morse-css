@@ -112,6 +112,32 @@ Create a file with your desired styles using the `:morse()` selector:
 }
 ```
 
+## Important Limitations
+
+### One Pattern Per Element
+
+Morse CSS has an important limitation: **only one Morse pattern can be applied per HTML element**. If multiple patterns are included at the beginning of an element, only the first pattern will be recognized and applied.
+
+To apply multiple styles to an element, you need to use nested elements, with each element having a single pattern:
+
+```html
+<!-- This won't work - only BORDER will be applied, PADDING2 will be ignored -->
+<div>
+  <!-- Morse code for BORDER and PADDING2 -->
+  <span></span>...<span></span>... This element will have a border but no padding.
+</div>
+
+<!-- This will work - both BORDER and PADDING2 are applied -->
+<div>
+  <!-- Morse code for BORDER -->
+  <span></span>...
+  <div>
+    <!-- Morse code for PADDING2 -->
+    <span></span>... This element will have both a border and padding.
+  </div>
+</div>
+```
+
 ## Available Patterns
 
 Here are some common patterns included in the default Morse CSS:
