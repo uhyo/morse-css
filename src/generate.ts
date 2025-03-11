@@ -16,6 +16,8 @@ const PSEUDO_CSS_PATH = path.join(process.cwd(), "src", "css", "example.pcss");
 const CSS_OUTPUT_PATH = path.join(process.cwd(), "output", "morse.css");
 const PSEUDO_HTML_PATH = path.join(process.cwd(), "src", "html", "pseudo-syntax.html");
 const HTML_OUTPUT_PATH = path.join(process.cwd(), "output", "converted.html");
+const WEBSITE_PSEUDO_HTML_PATH = path.join(process.cwd(), "website", "index.pseudo.html");
+const WEBSITE_HTML_OUTPUT_PATH = path.join(process.cwd(), "website", "index.html");
 
 // Ensure output directory exists
 if (!fs.existsSync(path.dirname(CSS_OUTPUT_PATH))) {
@@ -47,6 +49,25 @@ try {
 } catch (error) {
   console.error(`Error generating HTML: ${(error as Error).message}`);
   process.exit(1);
+}
+
+// Generate Website HTML
+console.log(`\nGenerating Website HTML from ${WEBSITE_PSEUDO_HTML_PATH}...`);
+try {
+  // Check if the website pseudo HTML file exists
+  if (fs.existsSync(WEBSITE_PSEUDO_HTML_PATH)) {
+    const websitePseudoHTML = fs.readFileSync(WEBSITE_PSEUDO_HTML_PATH, "utf-8");
+    // Convert the Morse code patterns
+    const websiteHtml = convertMorseHtml(websitePseudoHTML);
+    fs.writeFileSync(WEBSITE_HTML_OUTPUT_PATH, websiteHtml);
+    console.log(`Website HTML written to ${WEBSITE_HTML_OUTPUT_PATH}`);
+  } else {
+    console.log(`Website pseudo HTML file ${WEBSITE_PSEUDO_HTML_PATH} does not exist. Skipping.`);
+  }
+} catch (error) {
+  console.error(`Error generating Website HTML: ${(error as Error).message}`);
+  // Don't exit the process, just log the error and continue
+  console.error("Continuing with other generation tasks...");
 }
 
 console.log("\nGeneration complete!");
