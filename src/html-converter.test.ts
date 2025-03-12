@@ -30,6 +30,38 @@ describe("convertMorseHtml", () => {
     expect(result).toContain("<span></span>");
   });
 
+  it("should convert multiple patterns in a single element using + syntax", () => {
+    const input = "<p>{BOLD+RED} This text should be bold and red</p>";
+    const result = convertMorseHtml(input);
+
+    // Check that the pattern is replaced
+    expect(result).not.toContain("{BOLD+RED}");
+
+    // Check that the result contains the new HTML elements
+    expect(result).toContain("<i></i>");
+    expect(result).toContain("<span></span>");
+
+    // Check that the result contains a <wbr> element between patterns
+    expect(result).toContain("<wbr>");
+  });
+
+  it("should convert three or more patterns in a single element", () => {
+    const input = "<p>{BOLD+RED+UNDERLINE} This text should have multiple styles</p>";
+    const result = convertMorseHtml(input);
+
+    // Check that the pattern is replaced
+    expect(result).not.toContain("{BOLD+RED+UNDERLINE}");
+
+    // Check that the result contains the new HTML elements
+    expect(result).toContain("<i></i>");
+    expect(result).toContain("<span></span>");
+
+    // Check that the result contains <wbr> elements between patterns
+    // There should be 2 <wbr> elements for 3 patterns
+    const wbrCount = (result.match(/<wbr>/g) || []).length;
+    expect(wbrCount).toBe(2);
+  });
+
   it("should handle patterns within HTML attributes", () => {
     const input = '<div data-morse="{BOLD}" class="test">Test</div>';
     const result = convertMorseHtml(input);

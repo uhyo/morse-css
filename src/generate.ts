@@ -23,6 +23,18 @@ const UTILITY_EXAMPLES_OUTPUT_PATH = path.join(
   "examples",
   "utility-examples.html"
 );
+const MULTIPLE_PATTERNS_HTML_PATH = path.join(
+  process.cwd(),
+  "src",
+  "html",
+  "multiple-patterns-example.html"
+);
+const MULTIPLE_PATTERNS_OUTPUT_PATH = path.join(
+  process.cwd(),
+  "website",
+  "examples",
+  "multiple-patterns-example.html"
+);
 const WEBSITE_PSEUDO_HTML_PATH = path.join(process.cwd(), "src", "website", "index.pseudo.html");
 const WEBSITE_HTML_OUTPUT_PATH = path.join(process.cwd(), "website", "index.html");
 
@@ -75,6 +87,22 @@ try {
   console.log(`Utility Examples HTML written to ${UTILITY_EXAMPLES_OUTPUT_PATH}`);
 } catch (error) {
   console.error(`Error generating Utility Examples HTML: ${(error as Error).message}`);
+  // Don't exit the process, just log the error and continue
+  console.error("Continuing with other generation tasks...");
+}
+
+// Generate Multiple Patterns Example HTML
+console.log(`\nGenerating Multiple Patterns Example HTML from ${MULTIPLE_PATTERNS_HTML_PATH}...`);
+try {
+  const multiplePatternsHTML = fs.readFileSync(MULTIPLE_PATTERNS_HTML_PATH, "utf-8");
+  // Convert the Morse code patterns
+  let html = convertMorseHtml(multiplePatternsHTML);
+  // Fix the CSS path for the output file
+  html = html.replace("../output/morse.css", "../morse.css");
+  fs.writeFileSync(MULTIPLE_PATTERNS_OUTPUT_PATH, html);
+  console.log(`Multiple Patterns Example HTML written to ${MULTIPLE_PATTERNS_OUTPUT_PATH}`);
+} catch (error) {
+  console.error(`Error generating Multiple Patterns Example HTML: ${(error as Error).message}`);
   // Don't exit the process, just log the error and continue
   console.error("Continuing with other generation tasks...");
 }

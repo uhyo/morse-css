@@ -69,6 +69,9 @@ export function getMorseSelectorForChar(char: MorseChar): string {
 
 /**
  * Converts a Morse word to its corresponding HTML pattern selector
+ * The selector will match patterns both at the beginning of an element
+ * and after a <wbr> element, allowing multiple patterns to be applied
+ * to a single element.
  *
  * @param morseWord - The Morse word to convert
  * @returns The HTML pattern selector for the Morse word
@@ -101,6 +104,12 @@ export function getMorseSelectorForWord(morseWord: string): string {
   }
 
   // Join the selector parts with the adjacent sibling combinator
-  // Add the > prefix to indicate direct children
-  return "> " + selectorParts.join(" + ");
+  const patternSelector = selectorParts.join(" + ");
+
+  // Create two selectors: one for patterns at the beginning and one for patterns after <wbr>
+  const beginningSelector = "> " + patternSelector;
+  const afterWbrSelector = "> wbr + " + patternSelector;
+
+  // Return a selector that matches either pattern using :is() (or :where() for lower specificity)
+  return ":is(" + beginningSelector + ", " + afterWbrSelector + ")";
 }

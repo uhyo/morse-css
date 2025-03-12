@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Morse CSS Multiple Patterns Example</title>
+    <link rel="stylesheet" href="../output/morse.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Morse CSS Multiple Patterns Example</h1>
+      <p>A demonstration of using multiple Morse patterns on a single element</p>
+    </header>
+
+    <main>
+      <section>
+        <h2>Single Pattern Examples (For Comparison)</h2>
+        <p>{BOLD} This paragraph is bold.</p>
+        <p>{RED} This paragraph is red.</p>
+        <p>{UNDERLINE} This paragraph is underlined.</p>
+        <p>{LARGE} This paragraph is larger.</p>
+        <p>{CENTER} This paragraph is centered.</p>
+      </section>
+
+      <section>
+        <h2>Multiple Patterns Examples</h2>
+        <p>{BOLD+RED} This paragraph is both bold and red.</p>
+        <p>{BOLD+UNDERLINE} This paragraph is both bold and underlined.</p>
+        <p>{RED+LARGE} This paragraph is both red and larger.</p>
+        <p>{BOLD+CENTER} This paragraph is both bold and centered.</p>
+        <p>{BOLD+RED+UNDERLINE} This paragraph is bold, red, and underlined.</p>
+        <p>{LARGE+CENTER+BOLD} This paragraph is larger, centered, and bold.</p>
+      </section>
+
+      <section>
+        <h2>Complex Examples</h2>
+        <div>
+          {BORDER}
+          <div>
+            {ROUND}
+            <div>
+              {PADDING3}
+              <div>
+                {BGBLUE}
+                <div>
+                  {BOLD+CENTER+WHITE}
+                  <p>This is a card with multiple styles applied to a single element.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 20px">
+          {FLEXCOL+GAP3+PADDING3}
+          <div>
+            {BORDER+ROUND+BGGREEN}
+            <div>
+              {PADDING2+BOLD+WHITE}
+              <p>This is a flex column with multiple styles.</p>
+            </div>
+          </div>
+          <div>
+            {BORDER+ROUND+BGRED}
+            <div>
+              {PADDING2+BOLD+WHITE}
+              <p>This is another item in the flex column.</p>
+            </div>
+          </div>
+          <div>
+            {BORDER+ROUND+BGPURPLE}
+            <div>
+              {PADDING2+BOLD+WHITE}
+              <p>This is a third item in the flex column.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Morse CSS - A powerful classless CSS framework with Morse code patterns</p>
+    </footer>
+  </body>
+</html>

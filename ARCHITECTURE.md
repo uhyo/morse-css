@@ -108,33 +108,60 @@ morse-css/
 
 The generated CSS uses complex selectors to match Morse code patterns. Care must be taken to ensure these selectors are efficient and don't cause performance issues in browsers.
 
-### One Pattern Per Element Limitation
+### Multiple Patterns Per Element
 
-An important technical limitation of Morse CSS is that **only one Morse pattern can be applied per HTML element**. This is due to how the CSS selectors are generated and how the `:has()` selector works.
+Morse CSS now supports applying multiple Morse patterns to a single HTML element. This is achieved by:
 
-When multiple patterns are included at the beginning of an element, only the first pattern will be recognized and applied. This is because each pattern is designed to match from the first child element, and the CSS selector can only match one pattern at a time.
+1. Modifying the CSS selector generation to match patterns both at the beginning of an element AND after a `<wbr>` element
+2. Using the `:is()` pseudo-class to combine these selectors
+3. Introducing a new HTML pseudo-syntax for multiple patterns (`{PATTERN1+PATTERN2}`)
 
-To apply multiple styles to an element, developers need to use nested elements, with each element having a single pattern:
+#### CSS Selector Implementation
+
+The CSS selectors are generated to match patterns in two positions:
+
+1. At the beginning of an element (as before)
+2. After a `<wbr>` element (new)
+
+For example, for the Morse word "BOLD", the generated selector would be:
+
+```css
+*:has(
+    :is(> i:empty:first-child + span:empty + ..., > wbr + i:empty:first-child + span:empty + ...)
+  ) {
+  font-weight: bold;
+}
+```
+
+This selector will match elements that have the Morse pattern for "BOLD" either at the beginning of the element or after a `<wbr>` element.
+
+#### HTML Implementation
+
+In the HTML, multiple patterns are separated by `<wbr>` elements:
 
 ```html
-<!-- Only the first pattern (BORDER) will be applied -->
-<div>
-  <!-- Morse code for BORDER followed by Morse code for PADDING2 -->
-  <span></span>...<span></span>... This will only have a border.
-</div>
-
-<!-- Both patterns will be applied through nesting -->
+<!-- Element with multiple patterns -->
 <div>
   <!-- Morse code for BORDER -->
   <span></span>...
-  <div>
-    <!-- Morse code for PADDING2 -->
-    <span></span>... This will have both a border and padding.
-  </div>
+  <wbr />
+  <!-- Morse code for PADDING2 -->
+  <span></span>... This will have both a border and padding.
 </div>
 ```
 
-This limitation should be clearly documented for users and considered when designing new features or enhancements.
+#### Pseudo-Syntax (Internal Use Only)
+
+For internal development convenience, a new pseudo-syntax is introduced for HTML files:
+
+```html
+<!-- This will be converted to the appropriate Morse patterns with <wbr> separators -->
+<div>{BORDER+PADDING2} This will have both a border and padding.</div>
+```
+
+This pseudo-syntax is only used internally during development and is not exposed to end users. End users should use the raw HTML syntax with `<wbr>` elements as documented in the README.
+
+This approach maintains backward compatibility while adding the new functionality.
 
 ### Browser Compatibility
 

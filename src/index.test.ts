@@ -131,12 +131,12 @@ describe("convertMorseCSS", () => {
     // O = "---" = 3 dashes
     // S = "..." = 3 dots
     // So we should have 3 dots, then 3 dashes, then 3 dots
-    // With the new format, we add > at the beginning and :first-child to the first element
+    // With the new format, we use :is() to match patterns both at the beginning and after a <wbr>
     const firstChar = MORSE_CODE.S[0];
     const firstSelector = firstChar === "." ? "i:empty:first-child" : "span:empty:first-child";
-    const sosPattern = "> " + firstSelector;
 
-    // Just check that the result contains the beginning of the pattern
-    expect(result).toContain(`:has(${sosPattern}`);
+    // Just check that the result contains the key parts of the pattern
+    expect(result).toContain(":has(:is(");
+    expect(result).toContain(firstSelector);
   });
 });

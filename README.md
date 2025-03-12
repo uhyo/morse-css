@@ -112,31 +112,34 @@ Create a file with your desired styles using the `:morse()` selector:
 }
 ```
 
-## Important Limitations
+## Multiple Patterns Per Element
 
-### One Pattern Per Element
+Morse CSS allows you to apply multiple patterns to a single HTML element. This is done by separating the patterns with a `<wbr>` element in the HTML.
 
-Morse CSS has an important limitation: **only one Morse pattern can be applied per HTML element**. If multiple patterns are included at the beginning of an element, only the first pattern will be recognized and applied.
-
-To apply multiple styles to an element, you need to use nested elements, with each element having a single pattern:
+To apply multiple Morse patterns to a single element, separate each pattern with a `<wbr>` element:
 
 ```html
-<!-- This won't work - only BORDER will be applied, PADDING2 will be ignored -->
-<div>
-  <!-- Morse code for BORDER and PADDING2 -->
-  <span></span>...<span></span>... This element will have a border but no padding.
-</div>
-
-<!-- This will work - both BORDER and PADDING2 are applied -->
-<div>
-  <!-- Morse code for BORDER -->
+<p>
+  <!-- Morse code for BOLD -->
   <span></span>...
-  <div>
-    <!-- Morse code for PADDING2 -->
-    <span></span>... This element will have both a border and padding.
-  </div>
-</div>
+  <wbr />
+  <!-- Morse code for RED -->
+  <span></span>... This text will be both bold and red.
+</p>
+
+<p>
+  <!-- Morse code for BOLD -->
+  <span></span>...
+  <wbr />
+  <!-- Morse code for RED -->
+  <span></span>...
+  <wbr />
+  <!-- Morse code for UNDERLINE -->
+  <span></span>... This text will be bold, red, and underlined.
+</p>
 ```
+
+This allows you to combine multiple styles without having to nest elements, making your HTML cleaner and more maintainable.
 
 ## Available Patterns
 
