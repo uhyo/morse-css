@@ -17,8 +17,8 @@ Morse CSS is a classless CSS framework that allows you to style your HTML withou
 
 Morse CSS uses a clever approach to styling by recognizing Morse code patterns at the beginning of your HTML elements:
 
-- **Dots** in Morse code are represented as `<span></span>`
-- **Dashes** are represented as `<span><span><span></span></span></span>`
+- **Dots** in Morse code are represented as `<i></i>`
+- **Dashes** are represented as `<span></span>`
 
 For example, to make an element **bold**, you would include the Morse code for "BOLD" at the beginning of the element:
 
@@ -26,90 +26,45 @@ For example, to make an element **bold**, you would include the Morse code for "
 <p>
   <!-- Morse code for BOLD: -... --- .-.. -.. -->
   <span></span
-  ><span
-    ><span><span></span></span></span
-  ><span
-    ><span><span></span></span></span
-  ><span></span>
-  <span
-    ><span><span></span></span></span
-  ><span
-    ><span><span></span></span></span
-  ><span
-    ><span><span></span></span
-  ></span>
+  ><!-- B: -... -->
+  <i></i>
+  <i></i>
+  <i></i>
   <span></span
-  ><span
-    ><span><span></span></span></span
-  ><span></span><span></span>
-  <span
-    ><span><span></span></span></span
-  ><span></span><span></span>
+  ><!-- O: --- -->
+  <span></span>
+  <span></span>
+  <i></i
+  ><!-- L: .-.. -->
+  <span></span>
+  <i></i>
+  <i></i>
+  <span></span
+  ><!-- D: -.. -->
+  <i></i>
+  <i></i>
 
   This entire paragraph will be bold because the Morse code pattern at the beginning applies the
   style to the whole element.
 </p>
 ```
 
-The Morse code `-... --- .-.. -..` (BOLD) is represented by the pattern of nested spans at the beginning of the element, which Morse CSS recognizes and applies the corresponding style (in this case, `font-weight: bold`) to the entire element.
+The Morse code `-... --- .-.. -..` (BOLD) is represented by the pattern of empty `<i>` and `<span>` elements at the beginning of the element, which Morse CSS recognizes and applies the corresponding style (in this case, `font-weight: bold`) to the entire element.
 
 ## Installation
 
-### Using npm/pnpm
-
-```bash
-# Using npm
-npm install morse-css
-
-# Using pnpm
-pnpm add morse-css
-```
-
 ### Direct Download
 
-You can also download the CSS file directly from the [releases page](https://github.com/your-username/morse-css/releases).
+Download the CSS file directly from the [releases page](https://github.com/uhyo/morse-css/releases).
 
 ## Usage
 
-### 1. Using the pre-built CSS
+### Using the CSS
 
 Include the Morse CSS stylesheet in your HTML:
 
 ```html
 <link rel="stylesheet" href="path/to/morse.css" />
-```
-
-### 2. Using the converter
-
-If you want to create your own custom Morse CSS file, you can use the converter:
-
-```bash
-# Using npx
-npx morse-css src/css/your-file.pcss output/your-output.css
-
-# If installed globally
-morse-css src/css/your-file.pcss output/your-output.css
-```
-
-### 3. Creating a custom pseudo-CSS file
-
-Create a file with your desired styles using the `:morse()` selector:
-
-```css
-/* Make elements bold */
-*:morse(BOLD) {
-  font-weight: bold;
-}
-
-/* Make elements red */
-*:morse(RED) {
-  color: red;
-}
-
-/* Make elements italic */
-*:morse(ITALIC) {
-  font-style: italic;
-}
 ```
 
 ## Multiple Patterns Per Element
@@ -121,21 +76,18 @@ To apply multiple Morse patterns to a single element, separate each pattern with
 ```html
 <p>
   <!-- Morse code for BOLD -->
-  <span></span>...
+  <span></span>
+  <i></i>
+  <i></i>
+  <i></i>
+  <!-- ... rest of BOLD pattern -->
   <wbr />
   <!-- Morse code for RED -->
-  <span></span>... This text will be both bold and red.
-</p>
-
-<p>
-  <!-- Morse code for BOLD -->
-  <span></span>...
-  <wbr />
-  <!-- Morse code for RED -->
-  <span></span>...
-  <wbr />
-  <!-- Morse code for UNDERLINE -->
-  <span></span>... This text will be bold, red, and underlined.
+  <i></i>
+  <span></span>
+  <i></i>
+  <!-- ... rest of RED pattern -->
+  This text will be both bold and red.
 </p>
 ```
 
@@ -143,17 +95,111 @@ This allows you to combine multiple styles without having to nest elements, maki
 
 ## Available Patterns
 
-Here are some common patterns included in the default Morse CSS:
+Here are the patterns included in the default Morse CSS:
 
-| Pattern   | Morse Code                    | CSS Property                         |
-| --------- | ----------------------------- | ------------------------------------ |
-| BOLD      | -... --- .-.. -..             | font-weight: bold                    |
-| RED       | .-. . -..                     | color: red                           |
-| ITALIC    | .. - .- .-.. .. -.-.          | font-style: italic                   |
-| UNDERLINE | ..- -. -.. . .-. .-.. .. -. . | text-decoration: underline           |
-| LARGE     | .-.. .- .-. --. .             | font-size: 1.5em                     |
-| CENTER    | -.-. . -. - . .-.             | text-align: center                   |
-| BLUE      | -... .-.. ..- .               | background-color: blue; color: white |
+### Text Formatting
+
+| Pattern   | CSS Property                  |
+| --------- | ----------------------------- |
+| BOLD      | font-weight: bold             |
+| ITALIC    | font-style: italic            |
+| UNDERLINE | text-decoration: underline    |
+| STRIKE    | text-decoration: line-through |
+| OVERLINE  | text-decoration: overline     |
+| SMALL     | font-size: 0.875em            |
+| MEDIUM    | font-size: 1em                |
+| LARGE     | font-size: 1.5em              |
+| XLARGE    | font-size: 2em                |
+| XXLARGE   | font-size: 3em                |
+
+### Text Alignment
+
+| Pattern | CSS Property       |
+| ------- | ------------------ |
+| CENTER  | text-align: center |
+| LEFT    | text-align: left   |
+| RIGHT   | text-align: right  |
+
+### Display
+
+| Pattern | CSS Property  |
+| ------- | ------------- |
+| HIDE    | display: none |
+
+### Colors
+
+| Pattern  | CSS Property                           |
+| -------- | -------------------------------------- |
+| RED      | color: red                             |
+| GREEN    | color: green                           |
+| BLUE     | color: blue                            |
+| YELLOW   | color: yellow                          |
+| PURPLE   | color: purple                          |
+| ORANGE   | color: orange                          |
+| BLACK    | color: black                           |
+| WHITE    | color: white                           |
+| GRAY     | color: gray                            |
+| BGRED    | background-color: red                  |
+| BGGREEN  | background-color: green                |
+| BGBLUE   | background-color: blue; color: white   |
+| BGYELLOW | background-color: yellow               |
+| BGPURPLE | background-color: purple; color: white |
+| BGORANGE | background-color: orange               |
+| BGBLACK  | background-color: black; color: white  |
+| BGWHITE  | background-color: white                |
+| BGGRAY   | background-color: gray; color: white   |
+
+### Spacing
+
+| Pattern  | CSS Property  |
+| -------- | ------------- |
+| PADDING1 | padding: 4px  |
+| PADDING2 | padding: 8px  |
+| PADDING3 | padding: 16px |
+| PADDING4 | padding: 24px |
+| PADDING5 | padding: 32px |
+| MARGIN1  | margin: 4px   |
+| MARGIN2  | margin: 8px   |
+| MARGIN3  | margin: 16px  |
+| MARGIN4  | margin: 24px  |
+| MARGIN5  | margin: 32px  |
+| GAP1     | gap: 4px      |
+| GAP2     | gap: 8px      |
+| GAP3     | gap: 16px     |
+
+### Layout
+
+| Pattern | CSS Property                          |
+| ------- | ------------------------------------- |
+| FLEX    | display: flex                         |
+| FLEXROW | display: flex; flex-direction: row    |
+| FLEXCOL | display: flex; flex-direction: column |
+| GRID    | display: grid                         |
+| START   | justify-content: flex-start           |
+| END     | justify-content: flex-end             |
+| BETWEEN | justify-content: space-between        |
+| AROUND  | justify-content: space-around         |
+
+### Size
+
+| Pattern | CSS Property   |
+| ------- | -------------- |
+| FULL    | width: 100%    |
+| HALF    | width: 50%     |
+| THIRD   | width: 33.333% |
+| QUARTER | width: 25%     |
+| TALL    | height: 100%   |
+| SHORT   | height: 50%    |
+
+### Borders
+
+| Pattern     | CSS Property                     |
+| ----------- | -------------------------------- |
+| BORDER      | border: 1px solid currentColor   |
+| BORDERTHIN  | border: 0.5px solid currentColor |
+| BORDERTHICK | border: 2px solid currentColor   |
+| ROUND       | border-radius: 4px               |
+| ROUNDFULL   | border-radius: 9999px            |
 
 ## Browser Support
 
