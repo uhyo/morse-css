@@ -107,9 +107,10 @@ export function getMorseSelectorForWord(morseWord: string): string {
   const patternSelector = selectorParts.join(" + ");
 
   // Create two selectors: one for patterns at the beginning and one for patterns after <wbr>
-  const beginningSelector = "> " + patternSelector;
-  const afterWbrSelector = "> wbr + " + patternSelector;
+  const beginningSelector = patternSelector;
+  const afterWbrSelector = "wbr + " + patternSelector;
 
   // Return a selector that matches either pattern using :is() (or :where() for lower specificity)
-  return ":is(" + beginningSelector + ", " + afterWbrSelector + ")";
+  // The > (child combinator) is placed outside the :is() to ensure valid CSS syntax
+  return "> :is(" + beginningSelector + ", " + afterWbrSelector + ")";
 }

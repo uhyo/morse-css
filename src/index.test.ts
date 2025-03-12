@@ -136,7 +136,7 @@ describe("convertMorseCSS", () => {
     const firstSelector = firstChar === "." ? "i:empty:first-child" : "span:empty:first-child";
 
     // Just check that the result contains the key parts of the pattern
-    expect(result).toContain(":has(:is(");
+    expect(result).toContain(":has(> :is(");
     expect(result).toContain(firstSelector);
   });
 });

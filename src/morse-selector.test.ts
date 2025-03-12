@@ -23,9 +23,10 @@ describe("getMorseSelectorForWord", () => {
     // A = .-
     const result = getMorseSelectorForWord("A");
 
-    // The selector should match both at the beginning and after a <wbr>
-    expect(result).toContain("> i:empty:first-child + span:empty");
-    expect(result).toContain("> wbr + i:empty:first-child + span:empty");
+    // The selector should match patterns with :is()
+    expect(result).toContain("> :is(");
+    expect(result).toContain("i:empty:first-child + span:empty");
+    expect(result).toContain("wbr + i:empty:first-child + span:empty");
 
     // The selector should use :is() to combine the two selectors
     expect(result).toContain(":is(");
@@ -43,9 +44,10 @@ describe("getMorseSelectorForWord", () => {
     // Note: Only the first span gets :first-child
     const pattern = `${dotSelector}:first-child + ${dotSelector} + ${dotSelector} + ${dashSelector} + ${dashSelector} + ${dashSelector} + ${dotSelector} + ${dotSelector} + ${dotSelector}`;
 
-    // The selector should match both at the beginning and after a <wbr>
-    expect(result).toContain(`> ${pattern}`);
-    expect(result).toContain(`> wbr + ${pattern}`);
+    // The selector should match patterns with :is()
+    expect(result).toContain("> :is(");
+    expect(result).toContain(pattern);
+    expect(result).toContain(`wbr + ${pattern}`);
 
     // The selector should use :is() to combine the two selectors
     expect(result).toContain(":is(");
@@ -62,9 +64,10 @@ describe("getMorseSelectorForWord", () => {
     // A1 = .- .----
     const pattern = `${dotSelector}:first-child + ${dashSelector} + ${dotSelector} + ${dashSelector} + ${dashSelector} + ${dashSelector} + ${dashSelector}`;
 
-    // The selector should match both at the beginning and after a <wbr>
-    expect(result).toContain(`> ${pattern}`);
-    expect(result).toContain(`> wbr + ${pattern}`);
+    // The selector should match patterns with :is()
+    expect(result).toContain("> :is(");
+    expect(result).toContain(pattern);
+    expect(result).toContain(`wbr + ${pattern}`);
 
     // The selector should use :is() to combine the two selectors
     expect(result).toContain(":is(");
@@ -109,8 +112,8 @@ describe("getMorseSelectorForWord", () => {
     for (const { word, morse, parts } of testCases) {
       const result = getMorseSelectorForWord(word);
 
-      // Check that the result starts with :is(>
-      expect(result.startsWith(":is(> ")).toBe(true);
+      // Check that the result starts with >
+      expect(result.startsWith("> :is(")).toBe(true);
 
       // With the new selector format, we can't easily check each part
       // Just check that the result contains the correct Morse code characters
