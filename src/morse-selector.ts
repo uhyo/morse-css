@@ -98,17 +98,19 @@ export function getMorseSelectorForWord(morseWord: string): string {
     // This is handled by the adjacent sibling combinator (+)
   }
 
-  // Add :first-child to the first span
+  // Create two different pattern selectors
+  let beginningSelector = "";
+  let afterWbrSelector = "";
+
   if (selectorParts.length > 0) {
-    selectorParts[0] = selectorParts[0] + ":first-child";
+    // For the beginning selector, add :first-child to the first part
+    const beginningParts = [...selectorParts];
+    beginningParts[0] = beginningParts[0] + ":first-child";
+    beginningSelector = beginningParts.join(" + ");
+
+    // For the after-wbr selector, don't add :first-child
+    afterWbrSelector = "wbr + " + selectorParts.join(" + ");
   }
-
-  // Join the selector parts with the adjacent sibling combinator
-  const patternSelector = selectorParts.join(" + ");
-
-  // Create two selectors: one for patterns at the beginning and one for patterns after <wbr>
-  const beginningSelector = patternSelector;
-  const afterWbrSelector = "wbr + " + patternSelector;
 
   // Return a selector that matches either pattern using :is() (or :where() for lower specificity)
   // The > (child combinator) is placed outside the :is() to ensure valid CSS syntax

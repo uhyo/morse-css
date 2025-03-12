@@ -26,7 +26,7 @@ describe("getMorseSelectorForWord", () => {
     // The selector should match patterns with :is()
     expect(result).toContain("> :is(");
     expect(result).toContain("i:empty:first-child + span:empty");
-    expect(result).toContain("wbr + i:empty:first-child + span:empty");
+    expect(result).toContain("wbr + i:empty + span:empty");
 
     // The selector should use :is() to combine the two selectors
     expect(result).toContain(":is(");
@@ -41,13 +41,16 @@ describe("getMorseSelectorForWord", () => {
     const dashSelector = "span:empty";
 
     // SOS = ... --- ...
-    // Note: Only the first span gets :first-child
-    const pattern = `${dotSelector}:first-child + ${dotSelector} + ${dotSelector} + ${dashSelector} + ${dashSelector} + ${dashSelector} + ${dotSelector} + ${dotSelector} + ${dotSelector}`;
+    // For the beginning selector, the first element gets :first-child
+    const beginningPattern = `${dotSelector}:first-child + ${dotSelector} + ${dotSelector} + ${dashSelector} + ${dashSelector} + ${dashSelector} + ${dotSelector} + ${dotSelector} + ${dotSelector}`;
+
+    // For the after-wbr selector, no :first-child is added
+    const afterWbrPattern = `${dotSelector} + ${dotSelector} + ${dotSelector} + ${dashSelector} + ${dashSelector} + ${dashSelector} + ${dotSelector} + ${dotSelector} + ${dotSelector}`;
 
     // The selector should match patterns with :is()
     expect(result).toContain("> :is(");
-    expect(result).toContain(pattern);
-    expect(result).toContain(`wbr + ${pattern}`);
+    expect(result).toContain(beginningPattern);
+    expect(result).toContain(`wbr + ${afterWbrPattern}`);
 
     // The selector should use :is() to combine the two selectors
     expect(result).toContain(":is(");
@@ -62,12 +65,16 @@ describe("getMorseSelectorForWord", () => {
     const dashSelector = "span:empty";
 
     // A1 = .- .----
-    const pattern = `${dotSelector}:first-child + ${dashSelector} + ${dotSelector} + ${dashSelector} + ${dashSelector} + ${dashSelector} + ${dashSelector}`;
+    // For the beginning selector, the first element gets :first-child
+    const beginningPattern = `${dotSelector}:first-child + ${dashSelector} + ${dotSelector} + ${dashSelector} + ${dashSelector} + ${dashSelector} + ${dashSelector}`;
+
+    // For the after-wbr selector, no :first-child is added
+    const afterWbrPattern = `${dotSelector} + ${dashSelector} + ${dotSelector} + ${dashSelector} + ${dashSelector} + ${dashSelector} + ${dashSelector}`;
 
     // The selector should match patterns with :is()
     expect(result).toContain("> :is(");
-    expect(result).toContain(pattern);
-    expect(result).toContain(`wbr + ${pattern}`);
+    expect(result).toContain(beginningPattern);
+    expect(result).toContain(`wbr + ${afterWbrPattern}`);
 
     // The selector should use :is() to combine the two selectors
     expect(result).toContain(":is(");
