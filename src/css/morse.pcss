@@ -2,7 +2,8 @@
 
 /* Style for empty elements used in Morse patterns */
 i:empty,
-span:empty {
+span:empty,
+wbr:has(~ :is(i:empty, span:empty)) {
   display: none;
 }
 
