@@ -62,6 +62,49 @@ function getMorseHtmlForWord(morseWord: string): string {
 const MORSE_HTML_REGEX = /\{([^}]+)\}/g;
 
 /**
+ * Converts a pattern or multiple patterns to HTML markup
+ *
+ * @param input - The input pattern(s) to convert (e.g., "BOLD" or "BOLD+RED")
+ * @returns The HTML markup for the pattern(s)
+ * @throws Error if the pattern contains unknown characters
+ */
+export function convertPatternToHtml(input: string): string {
+  // Split the input by + to get individual patterns
+  const patterns = input.split("+");
+
+  if (patterns.length === 0) {
+    return "";
+  }
+
+  const htmlParts: string[] = [];
+
+  for (let i = 0; i < patterns.length; i++) {
+    const pattern = patterns[i].trim();
+
+    // Skip empty patterns
+    if (!pattern) {
+      continue;
+    }
+
+    // Validate the pattern
+    const allCharsValid = pattern.split("").every((char: string) => char in MORSE_CODE);
+    if (!allCharsValid) {
+      throw new Error(`Pattern "${pattern}" contains unknown characters`);
+    }
+
+    // Add the pattern's HTML
+    htmlParts.push(getMorseHtmlForWord(pattern));
+
+    // Add a <wbr> separator between patterns (except after the last one)
+    if (i < patterns.length - 1) {
+      htmlParts.push("<wbr>");
+    }
+  }
+
+  return htmlParts.join("");
+}
+
+/**
  * Converts HTML with pseudo syntax like {BOLD} or {BOLD+RED+UNDERLINE} to actual Morse CSS compatible HTML
  * For multiple patterns, they are separated by <wbr> elements to allow multiple patterns to be applied
  * to a single element.
@@ -73,42 +116,7 @@ export function convertMorseHtml(html: string): string {
   // Replace all {WORD} or {WORD+WORD+...} patterns with their Morse HTML representation
   return html.replace(MORSE_HTML_REGEX, (match, words) => {
     try {
-      // Split the words by + to get individual patterns
-      const patterns = words.split("+");
-
-      if (patterns.length === 1) {
-        // Single pattern - use the existing approach
-        const allCharsValid = patterns[0].split("").every((char: string) => char in MORSE_CODE);
-        if (!allCharsValid) {
-          console.error(
-            `Error converting Morse word "${patterns[0]}": Contains unknown characters`
-          );
-          return match;
-        }
-        return getMorseHtmlForWord(patterns[0]);
-      } else {
-        // Multiple patterns - generate HTML for each pattern with <wbr> separators
-        const htmlParts = [];
-
-        for (let i = 0; i < patterns.length; i++) {
-          const pattern = patterns[i];
-          const allCharsValid = pattern.split("").every((char: string) => char in MORSE_CODE);
-          if (!allCharsValid) {
-            console.error(`Error converting Morse word "${pattern}": Contains unknown characters`);
-            return match;
-          }
-
-          // Add the pattern's HTML
-          htmlParts.push(getMorseHtmlForWord(pattern));
-
-          // Add a <wbr> separator between patterns (except after the last one)
-          if (i < patterns.length - 1) {
-            htmlParts.push("<wbr>");
-          }
-        }
-
-        return htmlParts.join("");
-      }
+      return convertPatternToHtml(words);
     } catch (error) {
       console.error(`Error converting Morse words "${words}": ${(error as Error).message}`);
       // Return the original match if there's an error
