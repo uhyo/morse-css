@@ -49,8 +49,8 @@ Morse CSSでは、
 ```html
 <p>
   <!-- BOLDのモールス信号: -... --- .-.. -.. -->
-  <span></span><i></i><i></i><i></i> <span></span><span></span><span></span> <i></i><span></span
-  ><i></i><i></i> <span></span><i></i><i></i>
+  <span></span><i></i><i></i><i></i><span></span><span></span><span></span><i></i><span></span
+  ><i></i><i></i><span></span><i></i><i></i>
   このテキストは太字になります。
 </p>
 ```
@@ -96,12 +96,11 @@ Morse CSSの優れた点の一つは、一つの要素に複数のスタイル�
 ```html
 <p>
   <!-- BOLDのモールス信号 -->
-  <span></span><i></i><i></i><i></i>
-  <!-- ... -->
+  <span></span><i></i><i></i><i></i><span></span><span></span><span></span><i></i><span></span
+  ><i></i><i></i><span></span><i></i><i></i>
   <wbr />
   <!-- REDのモールス信号 -->
-  <i></i><span></span><i></i>
-  <!-- ... -->
+  <i></i><span></span><i></i><i></i><span></span><i></i><i></i>
   このテキストは太字で赤色になります。
 </p>
 ```
@@ -117,17 +116,15 @@ Morse CSSの優れた点の一つは、一つの要素に複数のスタイル�
 ```html
 <!-- 太字テキスト -->
 <p>
-  <!-- BOLDのモールス信号 -->
-  <span></span><i></i><i></i><i></i>
-  <!-- ... -->
+  <span></span><i></i><i></i><i></i><span></span><span></span><span></span><i></i><span></span
+  ><i></i><i></i><span></span><i></i><i></i>
   このテキストは太字になります。
 </p>
 
 <!-- イタリック体テキスト -->
 <p>
-  <!-- ITALICのモールス信号 -->
-  <i></i><i></i> <span></span><i></i>
-  <!-- ... -->
+  <i></i><i></i><span></span><i></i><span></span><i></i><span></span><i></i><i></i><i></i><i></i
+  ><span></span><i></i><span></span><i></i>
   このテキストはイタリック体になります。
 </p>
 ```
@@ -137,17 +134,14 @@ Morse CSSの優れた点の一つは、一つの要素に複数のスタイル�
 ```html
 <!-- 赤色テキスト -->
 <p>
-  <!-- REDのモールス信号 -->
-  <i></i><span></span><i></i>
-  <!-- ... -->
+  <i></i><span></span><i></i><i></i><span></span><i></i><i></i>
   このテキストは赤色になります。
 </p>
 
 <!-- 青色背景 -->
 <div>
-  <!-- BGBLUEのモールス信号 -->
-  <span></span><i></i><span></span>
-  <!-- ... -->
+  <span></span><i></i><i></i><i></i><span></span><span></span><i></i><span></span><i></i><i></i
+  ><i></i><i></i><span></span><i></i><i></i><i></i><i></i><span></span><i></i>
   この要素は青色の背景になります。
 </div>
 ```
@@ -157,9 +151,8 @@ Morse CSSの優れた点の一つは、一つの要素に複数のスタイル�
 ```html
 <!-- フレックスボックスレイアウト -->
 <div>
-  <!-- FLEXのモールス信号 -->
-  <span></span><i></i><i></i><i></i><span></span>
-  <!-- ... -->
+  <i></i><i></i><span></span><i></i><i></i><span></span><i></i><i></i><i></i><span></span><i></i
+  ><i></i><span></span>
   <div>アイテム1</div>
   <div>アイテム2</div>
   <div>アイテム3</div>
@@ -167,9 +160,8 @@ Morse CSSの優れた点の一つは、一つの要素に複数のスタイル�
 
 <!-- グリッドレイアウト -->
 <div>
-  <!-- GRIDのモールス信号 -->
-  <span></span><span></span><i></i><span></span>
-  <!-- ... -->
+  <span></span><span></span><i></i><i></i><span></span><i></i><i></i><i></i><span></span><i></i
+  ><i></i>
   <div>アイテム1</div>
   <div>アイテム2</div>
   <div>アイテム3</div>
@@ -182,13 +174,10 @@ Morse CSSの優れた点の一つは、一つの要素に複数のスタイル�
 ```html
 <!-- ボーダー付きの丸角要素 -->
 <div>
-  <!-- BORDERのモールス信号 -->
-  <span></span><i></i><span></span><i></i>
-  <!-- ... -->
-  <wbr />
-  <!-- ROUNDのモールス信号 -->
-  <i></i><span></span><span></span>
-  <!-- ... -->
+  <span></span><i></i><i></i><i></i><span></span><span></span><span></span><i></i><span></span
+  ><i></i><span></span><i></i><i></i><i></i><i></i><span></span><i></i><wbr /><i></i><span></span
+  ><i></i><span></span><span></span><span></span><i></i><i></i><span></span><span></span><i></i
+  ><span></span><i></i><i></i>
   この要素はボーダーと丸角が適用されます。
 </div>
 ```
@@ -223,53 +212,82 @@ Morse CSSの優れた点の一つは、一つの要素に複数のスタイル�
 
 ```html
 <div>
-  <!-- BGWHITE+BORDER+ROUND+PADDING4+MARGIN2 -->
-  <span></span><i></i><i></i><i></i> <wbr /> <span></span><i></i><span></span><i></i> <wbr /> <i></i
-  ><span></span><span></span> <wbr /> <span></span><i></i><i></i><i></i> <wbr /> <span></span><i></i
-  ><i></i>
+  <span></span><i></i><i></i><i></i><span></span><span></span><i></i><i></i><span></span
+  ><span></span><i></i><i></i><i></i><i></i><i></i><i></i><span></span><i></i><wbr /><span></span
+  ><i></i><i></i><i></i><span></span><span></span><span></span><i></i><span></span><i></i
+  ><span></span><i></i><i></i><i></i><i></i><span></span><i></i><wbr /><i></i><span></span><i></i
+  ><span></span><span></span><span></span><i></i><i></i><span></span><span></span><i></i
+  ><span></span><i></i><i></i><wbr /><i></i><span></span><span></span><i></i><i></i><span></span
+  ><span></span><i></i><i></i><span></span><i></i><i></i><i></i><i></i><span></span><i></i
+  ><span></span><span></span><i></i><i></i><i></i><i></i><i></i><span></span><wbr /><span></span
+  ><span></span><i></i><span></span><i></i><span></span><i></i><span></span><span></span><i></i
+  ><i></i><i></i><span></span><i></i><i></i><i></i><span></span><span></span><span></span>
   <h2>
-    <!-- XLARGE+BOLD+MARGIN2 -->
-    <span></span><i></i><i></i><i></i> <wbr /> <span></span><i></i><i></i><i></i> <wbr />
-    <span></span><i></i><i></i>
+    <span></span><i></i><i></i><span></span><i></i><span></span><i></i><i></i><i></i><span></span
+    ><i></i><span></span><i></i><span></span><span></span><i></i><i></i><wbr /><span></span><i></i
+    ><i></i><i></i><span></span><span></span><span></span><i></i><span></span><i></i><i></i
+    ><span></span><i></i><i></i><wbr /><span></span><span></span><i></i><span></span><i></i
+    ><span></span><i></i><span></span><span></span><i></i><i></i><i></i><span></span><i></i><i></i
+    ><i></i><span></span><span></span><span></span>
     ブログ記事のタイトル
   </h2>
   <div>
-    <!-- SMALL+GRAY+MARGIN4 -->
-    <i></i><i></i><i></i> <wbr /> <span></span><span></span><i></i> <wbr /> <span></span><i></i
-    ><i></i><i></i>
+    <i></i><i></i><i></i><span></span><span></span><i></i><span></span><i></i><span></span><i></i
+    ><i></i><i></i><span></span><i></i><i></i><wbr /><span></span><span></span><i></i><i></i
+    ><span></span><i></i><i></i><span></span><span></span><i></i><span></span><span></span
+    ><wbr /><span></span><span></span><i></i><span></span><i></i><span></span><i></i><span></span
+    ><span></span><i></i><i></i><i></i><span></span><i></i><i></i><i></i><i></i><i></i><span></span>
     <span>2025年3月13日</span>
     <span>
-      <!-- MARGIN2 -->
-      <span></span><i></i><i></i>
+      <span></span><span></span><i></i><span></span><i></i><span></span><i></i><span></span
+      ><span></span><i></i><i></i><i></i><span></span><i></i><i></i><i></i><span></span><span></span
+      ><span></span>
       著者: 山田太郎
     </span>
   </div>
   <div>
-    <!-- MARGIN4 -->
-    <span></span><i></i><i></i><i></i>
+    <span></span><span></span><i></i><span></span><i></i><span></span><i></i><span></span
+    ><span></span><i></i><i></i><i></i><span></span><i></i><i></i><i></i><i></i><i></i><span></span>
     <p>
-      <!-- MARGIN2 -->
-      <span></span><i></i><i></i>
+      <span></span><span></span><i></i><span></span><i></i><span></span><i></i><span></span
+      ><span></span><i></i><i></i><i></i><span></span><i></i><i></i><i></i><span></span><span></span
+      ><span></span>
       ここに記事の内容が入ります。Morse CSSは革新的なアプローチでHTMLをスタイリングします。
     </p>
   </div>
   <div>
     <span>
-      <!-- BGGRAY+PADDING1+ROUND+MARGIN1 -->
-      <span></span><span></span><i></i> <wbr /> <span></span><i></i> <wbr /> <i></i><span></span
-      ><span></span> <wbr /> <span></span><i></i>
+      <span></span><i></i><i></i><i></i><span></span><span></span><i></i><span></span><span></span
+      ><i></i><i></i><span></span><i></i><i></i><span></span><span></span><i></i><span></span
+      ><span></span><wbr /><i></i><span></span><span></span><i></i><i></i><span></span><span></span
+      ><i></i><i></i><span></span><i></i><i></i><i></i><i></i><span></span><i></i><span></span
+      ><span></span><i></i><i></i><span></span><span></span><span></span><span></span><wbr /><i></i
+      ><span></span><i></i><span></span><span></span><span></span><i></i><i></i><span></span
+      ><span></span><i></i><span></span><i></i><i></i><wbr /><span></span><span></span><i></i
+      ><span></span><i></i><span></span><i></i><span></span><span></span><i></i><i></i><i></i
+      ><span></span><i></i><i></i><span></span><span></span><span></span><span></span>
       CSS
     </span>
     <span>
-      <!-- BGGRAY+PADDING1+ROUND+MARGIN1 -->
-      <span></span><span></span><i></i> <wbr /> <span></span><i></i> <wbr /> <i></i><span></span
-      ><span></span> <wbr /> <span></span><i></i>
+      <span></span><i></i><i></i><i></i><span></span><span></span><i></i><span></span><span></span
+      ><i></i><i></i><span></span><i></i><i></i><span></span><span></span><i></i><span></span
+      ><span></span><wbr /><i></i><span></span><span></span><i></i><i></i><span></span><span></span
+      ><i></i><i></i><span></span><i></i><i></i><i></i><i></i><span></span><i></i><span></span
+      ><span></span><i></i><i></i><span></span><span></span><span></span><span></span><wbr /><i></i
+      ><span></span><i></i><span></span><span></span><span></span><i></i><i></i><span></span
+      ><span></span><i></i><span></span><i></i><i></i><wbr /><span></span><span></span><i></i
+      ><span></span><i></i><span></span><i></i><span></span><span></span><i></i><i></i><i></i
+      ><span></span><i></i><i></i><span></span><span></span><span></span><span></span>
       HTML
     </span>
     <span>
-      <!-- BGGRAY+PADDING1+ROUND -->
-      <span></span><span></span><i></i> <wbr /> <span></span><i></i> <wbr /> <i></i><span></span
-      ><span></span>
+      <span></span><i></i><i></i><i></i><span></span><span></span><i></i><span></span><span></span
+      ><i></i><i></i><span></span><i></i><i></i><span></span><span></span><i></i><span></span
+      ><span></span><wbr /><i></i><span></span><span></span><i></i><i></i><span></span><span></span
+      ><i></i><i></i><span></span><i></i><i></i><i></i><i></i><span></span><i></i><span></span
+      ><span></span><i></i><i></i><span></span><span></span><span></span><span></span><wbr /><i></i
+      ><span></span><i></i><span></span><span></span><span></span><i></i><i></i><span></span
+      ><span></span><i></i><span></span><i></i><i></i>
       Web開発
     </span>
   </div>
